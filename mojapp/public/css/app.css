@@ -1,0 +1,29 @@
+*{
+    font-family: 'robotoregular', sans-serif;
+}
+ 
+
+ @font-face {
+    font-family: 'robotoregular';
+    src: url('http://polaznik41.edunova.hr/mojapp/public/css/roboto-regular-webfont.woff2') format('woff2'),
+         url('http://polaznik41.edunova.hr/mojapp/public/css/roboto-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.large-10.medium-10.small-12.columns>h1{
+    width: 100%;
+    text-align: center;
+}
+
+
+.top-bar-right{
+
+    text-align:center;
+}
+
+#top-right{
+display:inline-block;
+}
