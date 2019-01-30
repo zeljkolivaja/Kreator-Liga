@@ -1,22 +1,21 @@
 *{
     font-family: 'robotoregular', sans-serif;
+    color: brown;
 }
  
-
  @font-face {
     font-family: 'robotoregular';
-    src: url('http://localhost/mojapp/public/css/roboto-regular-webfont.woff2') format('woff2'),
-         url('http://localhost/mojapp/public/css/roboto-regular-webfont.woff') format('woff');
+    src: url('http://polaznik41.edunova.hr/mojapp/public/css/roboto-regular-webfont.woff2') format('woff2'),
+         url('http://polaznik41.edunova.hr/mojapp/public/css/roboto-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
 }
 
-
 .large-10.medium-10.small-12.columns>h1{
-    position: relative;
+      
+     text-align: center;
      }
-
 
 .top-bar-right{
 
@@ -27,6 +26,14 @@
 display:inline-block;
 }
 
+#center{
+
+    margin: auto;
+    width: 40%;
+    /* color: beige; */
+ }
+
+ 
 
 #back{
     background-size: cover;
@@ -37,7 +44,18 @@ display:inline-block;
     background-size: cover;
     opacity: 0.5;
     padding-bottom: 20%;
-    max-height:50%;
   
-
+}
+html{
+        height: 100%;
+    
+}
+body  {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#49c0f0+0,ed742f+38 */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#88bae2+0,f5ab66+67,ef8d31+100 */
+background: rgb(136,186,226); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(136,186,226,1) 0%, rgba(245,171,102,1) 67%, rgba(239,141,49,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(136,186,226,1) 0%,rgba(245,171,102,1) 67%,rgba(239,141,49,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(136,186,226,1) 0%,rgba(245,171,102,1) 67%,rgba(239,141,49,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88bae2', endColorstr='#ef8d31',GradientType=0 ); /* IE6-9 */ 
 }
