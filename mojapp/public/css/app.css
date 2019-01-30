@@ -5,8 +5,8 @@
 
  @font-face {
     font-family: 'robotoregular';
-    src: url('http://polaznik41.edunova.hr/mojapp/public/css/roboto-regular-webfont.woff2') format('woff2'),
-         url('http://polaznik41.edunova.hr/mojapp/public/css/roboto-regular-webfont.woff') format('woff');
+    src: url('http://localhost/mojapp/public/css/roboto-regular-webfont.woff2') format('woff2'),
+         url('http://localhost/mojapp/public/css/roboto-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -14,9 +14,8 @@
 
 
 .large-10.medium-10.small-12.columns>h1{
-    width: 100%;
-    text-align: center;
-}
+    position: relative;
+     }
 
 
 .top-bar-right{
@@ -26,4 +25,19 @@
 
 #top-right{
 display:inline-block;
+}
+
+
+#back{
+    background-size: cover;
+    background-image: url("http://polaznik41.edunova.hr/mojapp/public/back.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.5;
+    padding-bottom: 20%;
+    max-height:50%;
+  
+
 }
