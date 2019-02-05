@@ -14,5 +14,10 @@ class Request{
 
     }
 
+    public static function post($key,$defalut=""){
+        return isset($_POST[$key]) ? $_POST[$key] : $defalut;
+    }
+
+
 
 }
