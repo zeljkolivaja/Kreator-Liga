@@ -10,24 +10,28 @@
                 <ul class="dropdown menu" data-dropdown-menu>
                 
                 <li>
-                <a href="<?php echo App::config("url")."index" ?>"><i class="fas fa-home"></i> Početna</a>
+                    <a href="<?php echo App::config("url")."index" ?>">Početna</a>
+                    
                 </li>
                 <li>
-                <a href="<?php echo App::config("url")."onama" ?>"><i class="fas fa-user"></i> O nama</a>
+                <a href="<?php echo App::config("url")."onama" ?>">O nama</a>
                 </li>
                 <li>
-                <a href="<?php echo App::config("url")."kontakt" ?>"> <i class="fas fa-address-card"></i> Kontakt</a>
+                <a href="<?php echo App::config("url")."kontakt" ?>">Kontakt</a>
                 </li>
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="menu" id="top-right">
-                <?php if(Session::getInstance()->isLogiran()):?>
-                <a href="<?php echo App::config("url") ?>admin/odjava">Odjava 
-                <?php echo Session::getInstance()->getUser()->firstNamelastName?></a>
-                <?php else:?><a href="<?php echo App::config("url") ?>admin/prijava">Prijava</a>
+                <ul class="menu">
+                <li>
+                <?php if(Session::getInstance()->isLogiran()): ?>
+                    <a href="<?php echo App::config("url") ?>admin/odjava">Odjava 
+                    <?php echo Session::getInstance()->getUser()->firstNamelastName ?>
+                    </a>
+                <?php else:?>
+                    <a href="<?php echo App::config("url") ?>admin/prijava">Prijava</a>
                 <?php endif;?>
-
+                </li>
                 </ul>
             </div>
         </div>
