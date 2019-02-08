@@ -1,0 +1,18 @@
+<div class="grid-x">
+    <?php foreach($vrste as $vrsta): ?>
+    <div class="cell large-4">
+        <div class="success callout operateri">
+            <h5><?php echo $vrsta->gameName?>
+                <br />
+                <?php echo $vrsta->description?>
+            </h5>
+            Bodovi u slučaju pobjede: <?php echo $vrsta->pointsPerWin?> <br />
+            Bodovi u slučaju nerješenog rezultata: <?php echo $vrsta->pointsPerDraw?><br />
+            Bodovi u slučaju poraza: <?php echo $vrsta->pointsPerLoss?>
+
+
+        </div>
+    </div>
+
+    <?php endforeach; ?>
+</div>

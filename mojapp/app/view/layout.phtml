@@ -1,42 +1,45 @@
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
+
 <head>
-<?php include_once "head.phtml"?>
+    <?php include_once "head.phtml"?>
 </head>
-  <body>
+
+<body>
     <div class="grid-container">
 
-    <div class="grid-x">
-        <div class="large-2 medium-2 columns hide-for-small-only">
-            slika
+        <div class="grid-x">
+            <div class="large-2 medium-2 columns hide-for-small-only">
+                slika
+            </div>
+            <div class="large-10 medium-10 small-12 columns">
+                <div id="center">
+                    <h1><?php echo App::config("nazivApp") ?></h1>
+                </div>
+            </div>
         </div>
-        <div class="large-10 medium-10 small-12 columns">
-        <div id="center">
-        <h1><?php echo App::config("nazivApp") ?></h1>
-        </div>  
-        </div>
-    </div>
 
-    <?php include_once "izbornik.phtml"?>
-       
+        <?php include_once "izbornik.phtml"?>
+
         <div class="callout" id="back" style="min-height: 400px;">
             <?php echo $content ?>
         </div>
-       
+
         <div class="callout">
-           &copy; Željko Livaja <?php echo date("Y") ?>
-           <br/>
-           &copy; <a href="https://pngtree.com/free-backgrounds">free background photos from pngtree.com</a>
+            &copy; Željko Livaja <?php echo date("Y") ?>
+            <br />
+            &copy; <a href="https://pngtree.com/free-backgrounds">free background photos from pngtree.com</a>
         </div>
 
 
 
 
     </div>
-    
+
     <script src="<?php echo App::config("url") ?>public/js/vendor/jquery.js"></script>
     <script src="<?php echo App::config("url") ?>public/js/vendor/what-input.js"></script>
     <script src="<?php echo App::config("url") ?>public/js/vendor/foundation.js"></script>
     <script src="<?php echo App::config("url") ?>public/js/app.js"></script>
-  </body>
+</body>
+
 </html>

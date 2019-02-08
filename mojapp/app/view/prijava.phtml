@@ -1,17 +1,13 @@
-<form class="log-in-form" method="post" 
-action="<?php echo App::config("url") ?>admin/login">
+<form class="log-in-form" method="post" action="<?php echo App::config("url") ?>admin/login">
 
-  <label>Korisničko ime
-    <input type="text" name="username" placeholder="Zelja"
-    value="<?php echo Request::post("username") ?>">
-  </label>
-  <label>Lozinka
-    <input type="password" name="password" placeholder="t">
-  </label>
- 
-  <p><input type="submit" class="button expanded" value="Prijava" /></p>
+    <label>Korisničko ime
+        <input type="text" name="username" placeholder="Zelja" value="<?php echo Request::post("username") ?>">
+    </label>
+    <label>Lozinka
+        <input type="password" name="password" placeholder="t">
+    </label>
+
+    <p><input type="submit" class="button expanded" value="Prijava" /></p>
 
 </form>
 <div id="poruka"> <?php echo $poruka ?> </div>
-
-

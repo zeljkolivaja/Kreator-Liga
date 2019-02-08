@@ -34,9 +34,21 @@ final class App{
            $action = strtolower($pathParts[1]);
        }
 
+       if(isset($pathParts[2])|| !empty($pathParts[2])){
+            $id = (int)$pathParts[2];
+        }else{
+            $id = 0;
+        }
+
+
        if(class_exists($controller) && method_exists($controller,$action)){
            $instanca = new $controller();
-           $instanca->$action();
+           if($id===0){
+            $instanca->$action();
+           }else{
+            $instanca->$action($id);
+           }
+           
        }else{
            header("HTTP/1.0 404 Not Found");
        }
@@ -54,4 +66,3 @@ final class App{
 
 
 }
-

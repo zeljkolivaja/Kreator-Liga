@@ -3,35 +3,45 @@
         <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
             <button class="menu-icon" type="button" data-toggle="example-menu"></button>
             <div class="title-bar-title">Izbornik</div>
-            </div>
+        </div>
 
-            <div class="top-bar" id="example-menu">
+        <div class="top-bar" id="example-menu">
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
-                
-                <li>
-                    <a href="<?php echo App::config("url")."index" ?>">Početna</a>
-                    
-                </li>
-                <li>
-                <a href="<?php echo App::config("url")."onama" ?>">O nama</a>
-                </li>
-                <li>
-                <a href="<?php echo App::config("url")."kontakt" ?>">Kontakt</a>
-                </li>
+
+                    <li>
+                        <a href="<?php echo App::config("url")."index" ?>">Početna</a>
+
+                    </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."onama" ?>">O nama</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."kontakt" ?>">Kontakt</a>
+                    </li>
+                    <?php if(Session::getInstance()->isLogiran()): ?>
+                    <li>
+                        <a href="<?php echo App::config("url")."korisnik/index" ?>">Korisnik</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."vrsta/index" ?>">Vrsta igre</a>
+                    </li>
+
+                    <?php endif;?>
+
                 </ul>
             </div>
             <div class="top-bar-right">
                 <ul class="menu">
-                <li>
-                <?php if(Session::getInstance()->isLogiran()): ?>
-                    <a href="<?php echo App::config("url") ?>admin/odjava">Odjava 
-                    <?php echo Session::getInstance()->getUser()->firstNamelastName ?>
-                    </a>
-                <?php else:?>
-                    <a href="<?php echo App::config("url") ?>admin/prijava">Prijava</a>
-                <?php endif;?>
-                </li>
+                    <li>
+                        <?php if(Session::getInstance()->isLogiran()): ?>
+                        <a href="<?php echo App::config("url") ?>admin/odjava">Odjava
+                            <?php echo Session::getInstance()->getUser()->firstNamelastName ?>
+                        </a>
+                        <?php else:?>
+                        <a href="<?php echo App::config("url") ?>admin/prijava">Prijava</a>
+                        <?php endif;?>
+                    </li>
                 </ul>
             </div>
         </div>

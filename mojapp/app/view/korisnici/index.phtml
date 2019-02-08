@@ -1,0 +1,33 @@
+<table>
+    <thead>
+        <tr>
+            <th>Administrator</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Korisničko Ime</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($korisnici as $korisnik): ?>
+        <tr>
+            <td>
+
+                <i class="fa<?php echo $korisnik->administrator ? "s" : "r" ?> fa-check-square"></i>
+
+            </td>
+            <td><?php echo $korisnik->firstName ?></td>
+            <td><?php echo $korisnik->lastName ?></td>
+            <td><?php echo $korisnik->username ?></td>
+
+            <td>
+                <a href="<?php echo App::config("url") ?>korisnik/edit/<?php echo $korisnik->id ?>">
+
+                    <i class="fas fa-edit fa-2x"></i>
+                </a>
+
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
