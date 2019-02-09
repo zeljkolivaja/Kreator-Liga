@@ -86,3 +86,27 @@ body > div > div:nth-child(4){
     text-align: center;
 
 }
+
+
+#back > div > div:nth-child(1) > div{
+    background-color: white;
+    opacity: 0.9;
+
+}
+
+#back > div > div:nth-child(2) > div{
+    background-color: white;
+    opacity: 0.9;
+
+}
+#back > div > div:nth-child(3) > div{
+    background-color: white;
+    opacity: 0.9;
+
+}
+
+body > div > div:nth-child(1) > div.large-2.medium-2.columns.hide-for-small-only > a > img{
+    max-width:90px ;
+    max-height: 90px ;
+
+}

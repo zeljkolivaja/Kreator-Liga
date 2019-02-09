@@ -10,21 +10,21 @@
                 <ul class="dropdown menu" data-dropdown-menu>
 
                     <li>
-                        <a href="<?php echo App::config("url")."index" ?>">Početna</a>
+                        <a href="<?php echo App::config("url")."index" ?>"><i class="fas fa-home"></i> Početna</a>
 
                     </li>
                     <li>
-                        <a href="<?php echo App::config("url")."onama" ?>">O nama</a>
+                        <a href="<?php echo App::config("url")."onama" ?>"><i class="fas fa-info-circle"></i> O nama</a>
                     </li>
                     <li>
-                        <a href="<?php echo App::config("url")."kontakt" ?>">Kontakt</a>
+                        <a href="<?php echo App::config("url")."kontakt" ?>"><i class="fas fa-envelope-square"></i> Kontakt</a>
                     </li>
                     <?php if(Session::getInstance()->isLogiran()): ?>
                     <li>
-                        <a href="<?php echo App::config("url")."korisnik/index" ?>">Korisnik</a>
+                        <a href="<?php echo App::config("url")."korisnik/index" ?>"><i class="fas fa-user"></i> Korisnik</a>
                     </li>
                     <li>
-                        <a href="<?php echo App::config("url")."vrsta/index" ?>">Vrsta igre</a>
+                        <a href="<?php echo App::config("url")."vrsta/index" ?>"><i class="fas fa-volleyball-ball"></i> Vrsta igre</a>
                     </li>
 
                     <?php endif;?>
