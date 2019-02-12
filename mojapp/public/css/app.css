@@ -110,3 +110,7 @@ body > div > div:nth-child(1) > div.large-2.medium-2.columns.hide-for-small-only
     max-height: 90px ;
 
 }
+
+.fa-edit{
+    color:green !important;
+}

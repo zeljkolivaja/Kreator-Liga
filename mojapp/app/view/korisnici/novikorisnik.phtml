@@ -1,5 +1,5 @@
 <form class="log-in-form" method="post"
-    action="<?php echo App::config("url") ?>korisnik/edit/<?php echo Request::post("id") ?>">
+    action="<?php echo App::config("url") ?>korisnik/add">
 
     <?php include_once "kontrole.phtml" ?>
 
@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="large-6 columns" style="padding: 10px;">
-            <input type="submit" class="success button expanded" value="Promjeni" />
+            <input type="submit" class="success button expanded" value="Dodaj korisnika" />
         </div>
     </div>
 

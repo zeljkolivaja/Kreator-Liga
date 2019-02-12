@@ -1,0 +1,18 @@
+    <label>Administrator
+        <input type="checkbox" name="administrator"
+            <?php if(Request::post("administrator")==="on"){
+        echo "checked";
+    } ?> />
+    </label>
+
+    <label>Ime
+        <input type="text" name="firstName" value="<?php echo Request::post("firstName") ?>" />
+    </label>
+
+    <label>Prezime
+        <input type="text" name="lastName" value="<?php echo Request::post("lastName") ?>" />
+    </label>
+
+    <label>Korisničko ime
+        <input type="text" name="username" value="<?php echo Request::post("username") ?>" />
+    </label>

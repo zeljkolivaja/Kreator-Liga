@@ -21,13 +21,22 @@
             <td><?php echo $korisnik->username ?></td>
 
             <td>
-                <a href="<?php echo App::config("url") ?>korisnik/edit/<?php echo $korisnik->id ?>">
-
-                    <i class="fas fa-edit fa-2x"></i>
+                <a href="<?php echo App::config("url") ?>korisnik/prepareedit/<?php echo $korisnik->id ?>">
+               <i class="fas fa-edit fa-2x"></i>
                 </a>
+                <?php if($korisnik->ukupno==0): ?>
+                    <a style="color: red;"
+                     href="<?php echo App::config("url") ?>korisnik/delete/<?php echo $korisnik->id ?>">
+                        <i class="fas fa-trash fa-2x"></i>
+                    </a>
+                <?php endif; ?>
 
             </td>
         </tr>
         <?php endforeach;?>
     </tbody>
+    
 </table>
+<a href="<?php echo App::config("url") ?>korisnik/prepareadd" class="success button expanded">
+    Dodaj novi smjer
+</a>
