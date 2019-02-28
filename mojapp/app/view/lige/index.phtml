@@ -7,10 +7,14 @@
     <?php foreach($popis as $vrsta): ?>
     <div class="cell large-4 medium-6 small-12">
         <!-- <div class="success callout operateri"> -->
-        <h5><strong><?php echo $vrsta->nameOfLeague?>
+        <h5><strong> Naziv lige: <?php echo $vrsta->nameOfLeague?>
                 <br />
-                <?php echo $vrsta->description?>
-            </strong></h5>
+               Opis: <?php echo $vrsta->description?>
+                <br />
+
+               Vrsta sporta: <?php echo $vrsta->gameType?>
+
+             </strong></h5>
 
         <a href="<?php echo App::config("url") ?>table/index/<?php echo $vrsta->id?>" class="button">
             Tablica Lige
@@ -41,3 +45,4 @@
     </div>
 
 </div>
+ 

@@ -4,7 +4,14 @@ class Popis{
 
     public static function read(){
         $db = Db::getInstance();
-        $izraz = $db->prepare("select id,nameOfLeague,leagueEmblem,users,description,gameType from league");
+        $izraz = $db->prepare("select
+        a.id,
+        a.nameOfLeague,
+        a.leagueEmblem,
+        a.users,
+        a.description,
+        b.gameName
+        gameType from league a inner join gameType b on b.id=a.gameType;");
         $izraz->execute();
         return $izraz->fetchAll();
     }
