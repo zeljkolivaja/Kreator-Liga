@@ -1,0 +1,43 @@
+<div class="grid-x">
+
+
+
+
+
+    <?php foreach($popis as $vrsta): ?>
+    <div class="cell large-4 medium-6 small-12">
+        <!-- <div class="success callout operateri"> -->
+        <h5><strong><?php echo $vrsta->nameOfLeague?>
+                <br />
+                <?php echo $vrsta->description?>
+            </strong></h5>
+
+        <a href="<?php echo App::config("url") ?>table/index/<?php echo $vrsta->id?>" class="button">
+            Tablica Lige
+        </a>
+
+        <a href="<?php echo App::config("url") ?>table/prepareadd/<?php echo $vrsta->id?>" class="success button">
+            Dodaj novi klub
+        </a>
+
+        <a href="<?php echo App::config("url") ?>liga/delete/<?php echo $vrsta->id?>" class="alert button">
+            Obriši ligu
+        </a>
+
+
+        <!-- </div> -->
+    </div>
+
+    <?php endforeach; ?>
+
+</div>
+<div class="grid-container">
+    <div class="grid-x align-center">
+
+        <a href="<?php echo App::config("url") ?>liga/prepareadd/<?php echo Session::getInstance()->getUser()->firstName?>"
+        class="success button">
+            Dodaj novu ligu
+        </a>
+    </div>
+
+</div>

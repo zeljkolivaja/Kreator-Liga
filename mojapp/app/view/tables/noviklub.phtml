@@ -1,0 +1,24 @@
+<form class="log-in-form" method="post"
+    action="<?php echo App::config("url") ?>table/add">
+
+    <label>Ime Kluba
+        <input type="text" name="nameOfTeam"/>
+    </label>
+    <label> 
+        <input type="hidden" name="league" value="<?php echo $poruka ?>" />
+    </label>
+
+
+    <div class="grid-x">
+        <div class="large-6 columns" style="padding: 10px;">
+            <a href="<?php echo App::config("url") ?>index" class="alert button expanded">
+                Odustani
+            </a>
+            
+        </div>
+        <div class="large-6 columns" style="padding: 10px;">
+            <input type="submit" class="success button expanded" value="Dodaj klub" />
+        </div>
+    </div>
+
+</form>

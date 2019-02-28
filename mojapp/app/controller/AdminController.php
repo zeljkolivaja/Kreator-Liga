@@ -12,7 +12,7 @@ class AdminController
          
 
         $db=Db::getInstance();
-        $izraz = $db->prepare("select firstName,lastName,username,password from users where username=:username");
+        $izraz = $db->prepare("select id,firstName,lastName,username,password from users where username=:username");
         $izraz->execute(["username"=>Request::post("username")]);
 
         $view = new View();
@@ -21,6 +21,7 @@ class AdminController
             $red=$izraz->fetch();
             if(password_verify(Request::post("password"),$red->password)){
                 $user = new stdClass();
+                $user->id=$red->id;
                 $user->firstName=$red->firstName;
                 $user->lastName=$red->lastName;
                 $user->username=$red->username;

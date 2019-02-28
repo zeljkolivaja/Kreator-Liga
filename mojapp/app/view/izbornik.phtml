@@ -22,10 +22,14 @@
                     <?php if(Session::getInstance()->isLogiran()): ?>
                     <li>
                         <a href="<?php echo App::config("url")."korisnik/index" ?>"><i class="fas fa-user"></i> Korisnik</a>
-                    </li>
+                
                     <li>
                         <a href="<?php echo App::config("url")."vrsta/index" ?>"><i class="fas fa-volleyball-ball"></i> Vrsta igre</a>
                     </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."liga/index" ?>"><i class="fas fa-user"></i> Lige</a>
+                    </li>
+
 
                     <?php endif;?>
 

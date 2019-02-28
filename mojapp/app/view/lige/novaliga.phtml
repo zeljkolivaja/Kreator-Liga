@@ -1,0 +1,42 @@
+<form class="log-in-form" method="post"
+    action="<?php echo App::config("url") ?>liga/add/">
+
+ 
+    </label>
+
+    <label>Ime Lige
+        <input type="text" name="nameOfLeague"/>
+    </label>
+
+    <label>Opis
+        <input type="text" name="description" />
+    </label>
+
+    <label> 
+        <input type="hidden" name="users" value="9" />
+    </label>
+
+
+        
+    <?php foreach($vrstasporta as $vrsta): ?>
+        
+    <input type="radio" name="gameType" value="<?php echo $vrsta->id?>"><?php echo $vrsta->gameName?><br>
+
+    <?php endforeach; ?>
+
+ 
+
+    <div class="grid-x">
+        <div class="large-6 columns" style="padding: 10px;">
+            <a href="<?php echo App::config("url") ?>liga/index" class="alert button expanded">
+                Odustani
+            </a>
+        </div>
+        <div class="large-6 columns" style="padding: 10px;">
+            <input type="submit" class="success button expanded" value="Promjeni" />
+        </div>
+    </div>
+ </form>
+ 
+
+ 

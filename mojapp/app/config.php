@@ -1,5 +1,19 @@
 <?php
 
+// return [
+//     "url"=>"http://localhost/mojapp/",
+//     "dev"=>true,
+//     "nazivApp" => "Kreator Liga",
+//     "db"=> [
+//         "host"=>"localhost",
+//         "name"=>"dionizliga",
+//         "user"=>"Delta",
+//         "password"=>"Delta"
+//     ]
+
+// ];
+
+ 
 return [
     "url"=>"http://polaznik41.edunova.hr/mojapp/",
     "dev"=>true,

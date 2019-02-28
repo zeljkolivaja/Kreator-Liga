@@ -1,0 +1,35 @@
+<div class="grid-x">
+    <table>
+        <thead>
+            <tr>
+                <th width="200">Klub</th>
+                <th width="100">Osvojeni Bodovi</th>
+                <th width="100">Zabijeni golovi</th>
+                <th width="100">Primljeni golovi</th>
+                <th width="100">Obriši klub</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($tablica as $podaci): ?>
+            <tr>
+                <td><?php echo $podaci->nameOfTeam?></td>
+                <td><?php echo $podaci->totalPoints?></td>
+                <td><?php echo $podaci->totalGoalsScored?></td>
+                <td><?php echo $podaci->totalGoalsConceded?></td>
+                <td><a style="color: red;"
+                        href="<?php echo App::config("url") ?>table/delete/<?php echo $podaci->id ?>">
+                        <i class="fas fa-trash fa-2x"></i>
+                    </a>
+                </td>
+
+            </tr>
+            <?php endforeach; ?>
+
+        </tbody>
+    </table>
+
+
+
+
+</div>
