@@ -12,7 +12,7 @@ public function __construct()
 }
 
  
-    function index($id=5)
+    function index($id)
     {
         $view = new View();
         $view->render('tables/index',
@@ -62,24 +62,39 @@ public function __construct()
 
 
 
+     
+
+    function prepareedit($id)
+    {
+        $view = new View();
+        $korisnik = Table::find($id);
+        $_POST["id"]=$korisnik->id;
+        $_POST["nameOfTeam"]=$korisnik->nameOfTeam;
+        $_POST["totalPoints"]=$korisnik->totalPoints;
+        $_POST["totalGoalsScored"]=$korisnik->totalGoalsScored;
+        $_POST["totalGoalsConceded"]=$korisnik->totalGoalsConceded;
+        $_POST["league"]=$korisnik->league;
+    
+    
+        $view->render(
+            'tables/edit',
+            [
+            "poruka"=>""
+            ]
+        );
+    }
+    
+
+
 
     function edit($id)
     {
         $_POST["id"]=$id;
-        $kontrola = $this->kontrola();
-        if($kontrola===true){
-            Korisnik::update($id);
-            $this->index();
-        }else{
-            $view = new View();
-            $view->render(
-                'korisnici/edit',
-                [
-                "poruka"=>$kontrola
-                ]
-            );
-        }
+        Table::update($id);
+        $this->home();
 
-    }
+      
+             
+        }
 
 }

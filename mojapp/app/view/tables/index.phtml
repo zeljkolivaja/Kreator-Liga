@@ -1,3 +1,4 @@
+
 <div class="grid-x">
     <table>
         <thead>
@@ -20,10 +21,15 @@
                 <td><a style="color: red;"
                         href="<?php echo App::config("url") ?>table/delete/<?php echo $podaci->id ?>">
                         <i class="fas fa-trash fa-2x"></i>
+                        <a href="<?php echo App::config("url") ?>table/prepareedit/<?php echo $podaci->id ?>">
+                            <i class="fas fa-edit fa-2x"></i>
+                        </a>
+
                     </a>
                 </td>
 
             </tr>
+ 
             <?php endforeach; ?>
 
         </tbody>

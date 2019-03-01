@@ -1,9 +1,5 @@
 <div class="grid-x">
 
-
-
-
-
     <?php foreach($popis as $vrsta): ?>
     <div class="cell large-4 medium-6 small-12">
         <!-- <div class="success callout operateri"> -->
@@ -27,6 +23,11 @@
         <a href="<?php echo App::config("url") ?>liga/delete/<?php echo $vrsta->id?>" class="alert button">
             Obriši ligu
         </a>
+
+        <a href="<?php echo App::config("url") ?>liga/prepareedit/<?php echo $vrsta->id?>" class="button warning">
+            Editiraj ligu
+        </a>
+
 
 
         <!-- </div> -->

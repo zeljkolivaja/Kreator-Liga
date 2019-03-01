@@ -39,6 +39,16 @@ public function __construct()
             return "Korisničko ime je obavezno";
         }
 
+        if(Request::post("firstName")===""){
+            return "Ime je obavezno";
+        }
+
+        if(Request::post("lastName")===""){
+            return "Prezime je obavezno";
+        }
+
+
+
         if(strlen(Request::post("username"))>50){
             return "Korisničko ime ne smije biti veći od 50 znakova";
         }
@@ -69,7 +79,6 @@ public function __construct()
         $view->render(
             'korisnici/edit',
             [
-            "poruka"=>""
             ]
         );
     }
@@ -105,6 +114,7 @@ public function __construct()
 
     }
 
+    
 
 
     function edit($id)
@@ -125,5 +135,6 @@ public function __construct()
         }
 
     }
+
 
 }
