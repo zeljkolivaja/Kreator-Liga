@@ -15,7 +15,7 @@ class Table{
             b.nameOfLeague
             from leagueTable a left join league b on b.id=a.league
             where b.id=$id
-            order by a.totalPoints DESC;
+            order by a.totalPoints DESC, a.totalGoalsScored DESC, a.totalGoalsConceded ASC;
             ");
         $izraz->execute();
         return $izraz->fetchAll();
@@ -25,7 +25,9 @@ class Table{
     public static function delete($id)
     {
         $db = Db::getInstance();
+        //online
         $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
+        //offline
         // $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
         $podaci = [];
         $podaci["id"]=$id;

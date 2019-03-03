@@ -84,7 +84,7 @@ function prepareedit($id)
 function edit($id)
 {
     $_POST["id"]=$id;
-    $kontrola = $this->kontrola();
+    $kontrola = $this->kontrolaedit();
     if($kontrola===true){
     Popis::update($id);
     $this->index();
@@ -115,17 +115,46 @@ function edit($id)
         }
  
 
-        // $db = Db::getInstance();
-        // $izraz = $db->prepare("select count(id) from users where username=:username and id<>:id");
-        // $izraz->execute(["username"=>Request::post("username"), "id" => Request::post("id")]);
-        // $ukupno = $izraz->fetchColumn();
-        // if($ukupno>0){
-        //     return "Ime postoji, odaberite drugo";
-        // }
-
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select count(id) from league where nameOfLeague=:nameOfLeague and id<>:id");
+        $izraz->execute(["nameOfLeague"=>Request::post("nameOfLeague"), "id" => $db->lastInsertId()]);
+        $ukupno = $izraz->fetchColumn();
+        if($ukupno>0){
+            return "Naziv postoji, odaberite drugi";
+        }
 
         return true;
     }
+
+
+    function kontrolaedit()
+    {
+        if(Request::post("nameOfLeague")===""){
+            return "Ime lige je obavezno";
+        }
+
+        if(Request::post("gameType")===""){
+            return "Vrsta igre je obavezna";
+        } 
+
+
+
+        if(strlen(Request::post("nameOfLeague"))>50){
+            return "Ime lige ne smije biti veći od 50 znakova";
+        }
+ 
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select count(id) from league where nameOfLeague=:nameOfLeague and id<>:id");
+        $izraz->execute(["nameOfLeague"=>Request::post("nameOfLeague"), "id" =>Request::post("id")]);
+        $ukupno = $izraz->fetchColumn();
+        if($ukupno>0){
+            return "Naziv postoji, odaberite drugi";
+        }
+
+        return true;
+    }
+
 
  
 }

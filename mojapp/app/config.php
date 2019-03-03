@@ -1,5 +1,5 @@
 <?php
-
+//offline
 // return [
 //     "url"=>"http://localhost/mojapp/",
 //     "dev"=>true,
@@ -13,7 +13,7 @@
 
 // ];
 
- 
+// online
 return [
     "url"=>"http://polaznik41.edunova.hr/mojapp/",
     "dev"=>true,

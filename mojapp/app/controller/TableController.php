@@ -44,11 +44,21 @@ public function __construct()
 
     function add()
     {
+            $kontrola = $this->kontrola();
+            if($kontrola===true){
             Table::add();
             $this->home();
- 
+        }else{
+            $view = new View();
+            $view->render(
+                'tables/poruka',
+                [
+                "poruka"=>$kontrola
+                ]
+            );
+    
     }
-
+}
     
     function home(){
         $view = new View();
@@ -90,11 +100,74 @@ public function __construct()
     function edit($id)
     {
         $_POST["id"]=$id;
-        Table::update($id);
-        $this->home();
+        $kontrola = $this -> kontrolaedit();
+        if ($kontrola===true) {
+            Table::update($id);
+            $this->home();
+        }else{
+            $view = new View();
+            $view->render(
+                'tables/poruka',
+                [
+                "poruka"=>$kontrola
+                ]
+            );
 
-      
+
+        }
              
         }
+        
+
+
+        function kontrola()
+        {
+            if(Request::post("nameOfTeam")===""){
+                return "Ime tima je obavezno";
+            }
+     
+    
+    
+            if(strlen(Request::post("nameOfTeam"))>50){
+                return "Ime tima ne smije biti veći od 50 znakova";
+            }
+     
+    
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select count(id) from leagueTable where nameOfTeam=:nameOfTeam and id<>:id");
+            $izraz->execute(["nameOfTeam"=>Request::post("nameOfTeam"), "id" => $db->lastInsertId()]);
+            $ukupno = $izraz->fetchColumn();
+            if($ukupno>0){
+                return "Naziv tima već postoji, odaberite drugi";
+            }
+    
+            return true;
+        }
+
+        function kontrolaedit()
+        {
+            if(Request::post("nameOfTeam")===""){
+                return "Ime tima je obavezno";
+            }
+     
+    
+    
+            if(strlen(Request::post("nameOfTeam"))>50){
+                return "Ime tima ne smije biti veći od 50 znakova";
+            }
+     
+    
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select count(id) from leagueTable where nameOfTeam=:nameOfTeam and id<>:id");
+            $izraz->execute(["nameOfTeam"=>Request::post("nameOfTeam"), "id" => Request::post("id")]);
+            $ukupno = $izraz->fetchColumn();
+            if($ukupno>0){
+                return "Naziv tima već postoji, odaberite drugi";
+            }
+    
+            return true;
+        }
+
+    
 
 }

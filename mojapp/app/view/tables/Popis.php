@@ -5,24 +5,14 @@ class Popis{
     public static function read(){
         $db = Db::getInstance();
         $izraz = $db->prepare("select
-		a.nameOfLeague,
         a.id,
-		a.leagueEmblem,
-        a.users,
-		a.description,
-        c.gameName,
-        count(b.league) as ukupno
-        from league a 
-        left join leagueTable b on a.id=b.league
-        left join gameType c on c.id=a.gameType 
-        
-        group by
         a.nameOfLeague,
-        a.id,
         a.leagueEmblem,
         a.users,
-		a.description,
-        c.gameName");
+        a.description,
+        b.gameName
+        from league a
+        inner join gameType b on b.id=a.gameType;");
         $izraz->execute();
         return $izraz->fetchAll();
     }
@@ -36,8 +26,7 @@ public static function find($id){
     }
 
 
-
-    public static function delete($id)
+public static function delete($id)
 {
     $db = Db::getInstance();
     $izraz = $db->prepare("delete from league where id=:id");

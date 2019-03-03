@@ -8,7 +8,7 @@
                Opis: <?php echo $vrsta->description?>
                 <br />
 
-               Vrsta sporta: <?php echo $vrsta->gameType?>
+               Vrsta sporta: <?php echo $vrsta->gameName?>
 
              </strong></h5>
 
@@ -19,10 +19,18 @@
         <a href="<?php echo App::config("url") ?>table/prepareadd/<?php echo $vrsta->id?>" class="success button">
             Dodaj novi klub
         </a>
+        <?php if($vrsta->ukupno==0): ?>
 
         <a href="<?php echo App::config("url") ?>liga/delete/<?php echo $vrsta->id?>" class="alert button">
             Obriši ligu
         </a>
+
+<?php else: ?>
+        <a href="#" class="alert button" title="prije brisanja lige obrišite sve njene klubove" disabled>
+            Obriši ligu
+        </a>
+
+        <?php endif; ?>
 
         <a href="<?php echo App::config("url") ?>liga/prepareedit/<?php echo $vrsta->id?>" class="button warning">
             Editiraj ligu

@@ -1,12 +1,16 @@
 
 <div class="grid-x">
+<a href="<?php echo App::config("url") ?>liga/index" class="success button">
+    Povratak
+</a>
+ 
     <table>
         <thead>
             <tr>
                 <th width="200">Klub</th>
                 <th width="100">Osvojeni Bodovi</th>
-                <th width="100">Zabijeni golovi</th>
-                <th width="100">Primljeni golovi</th>
+                <th width="100" class="hide-for-small-only">Zabijeni golovi</th>
+                <th width="100" class="hide-for-small-only">Primljeni golovi</th>
                 <th width="100">Obriši klub</th>
 
             </tr>
@@ -16,8 +20,8 @@
             <tr>
                 <td><?php echo $podaci->nameOfTeam?></td>
                 <td><?php echo $podaci->totalPoints?></td>
-                <td><?php echo $podaci->totalGoalsScored?></td>
-                <td><?php echo $podaci->totalGoalsConceded?></td>
+                <td class="hide-for-small-only"><?php echo $podaci->totalGoalsScored?></td>
+                <td class="hide-for-small-only"><?php echo $podaci->totalGoalsConceded?></td>
                 <td><a style="color: red;"
                         href="<?php echo App::config("url") ?>table/delete/<?php echo $podaci->id ?>">
                         <i class="fas fa-trash fa-2x"></i>
@@ -34,8 +38,54 @@
 
         </tbody>
     </table>
+ 
+
+ 
+<?php (array_chunk($tablica, 2)); 
+$array = json_decode(json_encode($tablica), true); 
+$members = array_column($array , 'nameOfTeam');
+// print_r($members);
+
+ 
+function scheduler($members){
+    if (count($members)%2 != 0){
+        array_push($members,"slobodan");
+    }
+    $away = array_splice($members,(count($members)/2));
+    $home = $members;
+    for ($i=0; $i < count($home)+count($away)-1; $i++){
+        for ($j=0; $j<count($home); $j++){
+            $round[$i][$j]["Home"]=$home[$j];
+            $round[$i][$j]["Away"]=$away[$j];
+        }
+        if(count($home)+count($away)-1 > 2){
+            // array_unshift($away,array_shift(array_splice($home,1,1)));
+            array_unshift($away, current(array_splice($home,1,1)) ); 
+            array_push($home,array_pop($away));
+        }
+    }
+    return $round;
+}
+$schedule = scheduler($members);
 
 
+ ?>
+ 
 
+ <?php foreach($schedule as $round => $games):?>
+ <div class="cell large-3 small-6">
 
-</div>
+     <b>
+    <?php echo "Kolo: ".($round+1)."<BR>"; ?>
+    </b>
+    <?php foreach($games AS $play){ ?>
+       <?php echo $play["Home"]." - ".$play["Away"]."<BR>"; 
+    }?>
+    <br>
+    </div>
+<?php endforeach; ?>
+
+ 
+ 
+ </div>
+ </div>
