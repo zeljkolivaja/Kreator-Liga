@@ -26,9 +26,9 @@ class Table{
     {
         $db = Db::getInstance();
         //online
-        $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
+        // $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
         //offline
-        // $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
+        $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
         $podaci = [];
         $podaci["id"]=$id;
         $izraz->execute($podaci);

@@ -79,7 +79,28 @@ $schedule = scheduler($members);
     <?php echo "Kolo: ".($round+1)."<BR>"; ?>
     </b>
     <?php foreach($games AS $play){ ?>
-       <?php echo $play["Home"]." - ".$play["Away"]."<BR>"; 
+        <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
+           
+           if($play["Home"]!=="slobodan"){
+               echo "<b>";
+               echo  $play["Home"]. " preskace ovo kolo"."<BR>";
+               echo "</b>";
+
+           }
+
+           if($play["Away"]!=="slobodan"){
+            echo "<b>";
+            echo  $play["Away"]. " preskace ovo kolo"."<BR>";
+            echo "</b>";        }
+
+           
+           continue;        
+           } ?>
+       <?php
+         
+      echo $play["Home"]." - ".$play["Away"]."<BR>"; 
+    
+
     }?>
     <br>
     </div>
