@@ -1,0 +1,58 @@
+<?php foreach($schedule as $round => $games): ?>
+ 
+    <?php echo "Kolo: ".($round+1)."<br/>"."<hr/>"; ?>
+
+    <form class="log-in-form" method="post" action="#">
+
+        <?php foreach($games AS $play): ?>
+
+
+        <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
+    continue;
+} ?>
+        <label> Ime Kluba
+            <input type="text" name="homeTeam" value="<?php echo $play["Home"] ?>" readonly/>
+        </label>
+
+        <label><b> Postignuti Golovi kluba <?php echo $play["Home"] ?> </b>
+            <input type="number" name="goalsHome" value="<?php echo $poruka ?>" />
+        </label>
+
+
+        <label> Ime Kluba
+            <input type="text" name="awayTeam" value="<?php echo $play["Away"] ?>" readonly />
+        </label>
+
+        
+        <label> <b> Postignuti Golovi kluba <?php echo $play["Away"] ?> </b>
+            <input type="number" name="goalsAway" value="<?php echo $poruka ?>" />
+        </label>
+ 
+
+        <label> <b> Bodovi u slučaju pobjede </b>
+            <input type="number" name="goalsAway" value="<?php echo $bodovi ?>" readonly />
+        </label>
+
+        <label> <b> Bodovi u slučaju poraza </b>
+            <input type="number" name="goalsAway" value="<?php echo $bodovix ?>" readonly />
+        </label>
+
+
+        <div class="grid-x">
+            <div style="padding: 10px;">
+                <a href="#" class="alert button">
+                    Odustani
+                </a>
+
+
+            </div>
+            <div style="padding: 10px;">
+                <input type="submit" class="success button" value="Dodaj klub" />
+            </div>
+        </div>
+        <br/>
+        <?php  endforeach; ?>
+
+    </form>
+
+    <?php endforeach; ?>

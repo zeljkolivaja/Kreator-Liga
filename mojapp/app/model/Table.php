@@ -6,17 +6,19 @@ class Table{
     {
         $db = Db::getInstance();
         $izraz = $db->prepare("
-            select
-            a.id,
-            a.nameOfTeam,
-            a.totalPoints,
-            a.totalGoalsScored,
-            a.totalGoalsConceded,
-            b.nameOfLeague
-            from leagueTable a left join league b on b.id=a.league
-            where b.id=$id
-            order by a.totalPoints DESC, a.totalGoalsScored DESC, a.totalGoalsConceded ASC;
-            ");
+        select
+        a.id,
+        a.nameOfTeam,
+        a.totalPoints,
+        a.totalGoalsScored,
+        a.totalGoalsConceded,
+        b.nameOfLeague,
+        c.pointsPerWin,
+        c.pointsPerDraw
+        from leagueTable a left join league b on b.id=a.league
+        inner join gameType c on b.gameType=c.id
+        where b.id=$id
+        order by a.totalPoints DESC, a.totalGoalsScored DESC, a.totalGoalsConceded ASC;");
         $izraz->execute();
         return $izraz->fetchAll();
     }

@@ -1,10 +1,13 @@
-
 <div class="grid-x">
-<a href="<?php echo App::config("url") ?>liga/index" class="success button">
-    Povratak
-</a>
+    <a href="<?php echo App::config("url") ?>liga/index" class="success button">
+        Povratak
+    </a>
  
+
+
     <table>
+    <caption><h4>Ljestvica</h4></caption>
+
         <thead>
             <tr>
                 <th width="200">Klub</th>
@@ -33,52 +36,32 @@
                 </td>
 
             </tr>
- 
+            <?php $bodovi = $podaci->pointsPerWin ?>
+            <?php $bodovix = $podaci->pointsPerDraw ?>
+
+
             <?php endforeach; ?>
 
         </tbody>
     </table>
- 
-
- 
-<?php (array_chunk($tablica, 2)); 
-$array = json_decode(json_encode($tablica), true); 
-$members = array_column($array , 'nameOfTeam');
-// print_r($members);
-
- 
-function scheduler($members){
-    if (count($members)%2 != 0){
-        array_push($members,"slobodan");
-    }
-    $away = array_splice($members,(count($members)/2));
-    $home = $members;
-    for ($i=0; $i < count($home)+count($away)-1; $i++){
-        for ($j=0; $j<count($home); $j++){
-            $round[$i][$j]["Home"]=$home[$j];
-            $round[$i][$j]["Away"]=$away[$j];
-        }
-        if(count($home)+count($away)-1 > 2){
-            // array_unshift($away,array_shift(array_splice($home,1,1)));
-            array_unshift($away, current(array_splice($home,1,1)) ); 
-            array_push($home,array_pop($away));
-        }
-    }
-    return $round;
-}
-$schedule = scheduler($members);
 
 
- ?>
- 
 
- <?php foreach($schedule as $round => $games):?>
- <div class="cell large-3 small-6">
+    <?php include_once "fixturesprepare.phtml" ?>
 
-     <b>
-    <?php echo "Kolo: ".($round+1)."<BR>"; ?>
-    </b>
-    <?php foreach($games AS $play){ ?>
+
+
+
+
+
+
+    <?php foreach($schedule as $round => $games):?>
+    <div class="cell large-3 small-6">
+
+        <b>
+            <?php echo "Kolo: ".($round+1)."<BR>"; ?>
+        </b>
+        <?php foreach($games AS $play){ ?>
         <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
            
            if($play["Home"]!=="slobodan"){
@@ -96,17 +79,29 @@ $schedule = scheduler($members);
            
            continue;        
            } ?>
-       <?php
+        <?php
          
       echo $play["Home"]." - ".$play["Away"]."<BR>"; 
     
 
     }?>
-    <br>
+        <br>
     </div>
-<?php endforeach; ?>
 
- 
- 
- </div>
- </div>
+
+    <?php endforeach; ?>
+
+
+
+</div>
+
+
+<?php include_once "updateresult.phtml" ?>
+
+
+</div>
+
+
+
+
+</div>
