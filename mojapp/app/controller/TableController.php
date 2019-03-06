@@ -169,5 +169,25 @@ public function __construct()
         }
 
     
+        function insert()
+        {
+             
+                Table::insert();
+                $this->home();
+     
+    }
+    
+
+
+    function rezultati($id)
+    {
+        $view = new View();
+        $view->render('tables/rezultati',
+        ["tablica"=>Table::rezultati($id)
+        ]
+    );
+    }
+
+    
 
 }

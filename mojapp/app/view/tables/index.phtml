@@ -2,11 +2,13 @@
     <a href="<?php echo App::config("url") ?>liga/index" class="success button">
         Povratak
     </a>
- 
+
 
 
     <table>
-    <caption><h4>Ljestvica</h4></caption>
+        <caption>
+            <h4>Ljestvica</h4>
+        </caption>
 
         <thead>
             <tr>
@@ -38,6 +40,8 @@
             </tr>
             <?php $bodovi = $podaci->pointsPerWin ?>
             <?php $bodovix = $podaci->pointsPerDraw ?>
+            <?php $league = $podaci->sifra ?>
+
 
 
             <?php endforeach; ?>
@@ -105,3 +109,5 @@
 
 
 </div>
+
+ 

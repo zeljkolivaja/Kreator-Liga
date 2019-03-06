@@ -14,6 +14,7 @@ class Table{
         a.totalGoalsConceded,
         b.nameOfLeague,
         c.pointsPerWin,
+        b.id as sifra,
         c.pointsPerDraw
         from leagueTable a left join league b on b.id=a.league
         inner join gameType c on b.gameType=c.id
@@ -93,6 +94,93 @@ class Table{
 
 }
 
+// private static function podacigame1(){
+//     return [
+//         "homeTeam"=>Request::post("homeTeam")
+//        )
+ 
+//     ];
+// }
 
+
+
+// private static function podacigame2(){
+//     return [
+//         "awayTeam"=>Request::post("awayTeam"),
+//        )
+ 
+//     ];
+// }
+
+private static function podacigame(){
+    return [
+        "homeTeamGoals"=>Request::post("homeTeamGoals"),
+        "awayTeamGoals"=>Request::post("awayTeamGoals"),
+        "league"=>Request::post("league")
+
+ 
+    ];
+}
+
+
+private static function podacigameHomeTeam(){
+    return [
+        "homeTeam"=>Request::post("homeTeam")
+  
+    ];
+}
+
+
+private static function podacigameAwayTeam(){
+    return [
+        "awayTeam"=>Request::post("awayTeam")
+  
+    ];
+}
+
+
+
+
+public static function insert()
+{
+    $db = Db::getInstance();
+    $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:homeTeam;");
+    $izraz->execute(self::podacigameHomeTeam());
+    $homeTeam = $izraz->fetchColumn();
+ 
+    $db = Db::getInstance();
+    $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:awayTeam;");
+    $izraz->execute(self::podacigameAwayTeam());
+    $awayTeam = $izraz->fetchColumn();
+
+
+
+    $izraz = $db->prepare("insert into game(homeTeam,AwayTeam,homeTeamGoals,awayTeamGoals,league)
+    values ($homeTeam,$awayTeam,:homeTeamGoals,:awayTeamGoals,:league);");
+    $izraz->execute(self::podacigame());
+ 
+}
+
+
+ 
+    public static function rezultati($id)
+    {
+        $db = Db::getInstance();
+        $izraz = $db->prepare("
+        select 
+        homeTeamGoals,
+        awayTeamGoals
+        from game where league=$id;");
+        $izraz->execute();
+        return $izraz->fetchAll();
+    }
+
+
+//  a.id,
+// b.nameOfTeam,
+// c.homeTeamGoals
+// from league a right join leagueTable b on a.id=b.league
+// inner join game c on a.id=b.league 
+// where a.id=6;
 
 }

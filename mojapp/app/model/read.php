@@ -59,3 +59,13 @@ foreach($schedule AS $round => $games){
     echo "<BR>";
 }
 ?>
+
+
+
+select 
+a.id,
+b.nameOfTeam,
+c.homeTeamGoals
+from league a right join leagueTable b on a.id=b.league
+inner join game c on a.id=b.league 
+where a.id=6;
