@@ -29,9 +29,9 @@ class Table{
     {
         $db = Db::getInstance();
         //online
-        // $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
+        $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
         //offline
-        $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
+        // $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
         $podaci = [];
         $podaci["id"]=$id;
         $izraz->execute($podaci);
@@ -94,24 +94,6 @@ class Table{
 
 }
 
-// private static function podacigame1(){
-//     return [
-//         "homeTeam"=>Request::post("homeTeam")
-//        )
- 
-//     ];
-// }
-
-
-
-// private static function podacigame2(){
-//     return [
-//         "awayTeam"=>Request::post("awayTeam"),
-//        )
- 
-//     ];
-// }
-
 private static function podacigame(){
     return [
         "homeTeamGoals"=>Request::post("homeTeamGoals"),
@@ -155,8 +137,8 @@ public static function insert()
 
 
 
-    $izraz = $db->prepare("insert into game(homeTeam,AwayTeam,homeTeamGoals,awayTeamGoals,league)
-    values ($homeTeam,$awayTeam,:homeTeamGoals,:awayTeamGoals,:league);");
+    $izraz = $db->prepare("insert into game(homeTeamGoals,awayTeamGoals,league,homeTeam,AwayTeam)
+    values (:homeTeamGoals,:awayTeamGoals,:league,$homeTeam,$awayTeam);");
     $izraz->execute(self::podacigame());
  
 }
@@ -168,8 +150,7 @@ public static function insert()
         $db = Db::getInstance();
         $izraz = $db->prepare("
         select 
-        homeTeamGoals,
-        awayTeamGoals
+        *
         from game where league=$id;");
         $izraz->execute();
         return $izraz->fetchAll();

@@ -1,10 +1,10 @@
 <?php foreach($schedule as $round => $games): ?>
 
 <?php echo "Kolo: ".($round+1)."<br/>"."<hr/>"; ?>
+<?php foreach($games AS $play): ?>
 
 <form class="log-in-form" method="post" action="<?php echo App::config("url") ?>table/insert/">
 
-    <?php foreach($games AS $play): ?>
 
 
     <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
@@ -25,7 +25,7 @@
 
 
     <label> <b> Postignuti Golovi kluba <?php echo $play["Away"] ?> </b>
-        <input type="number" name="homeTeamGoals" />
+        <input type="number" name="awayTeamGoals" />
     </label>
 
 
@@ -60,8 +60,8 @@
         </div>
     </div>
     <br />
-    <?php  endforeach; ?>
 
 </form>
+<?php  endforeach; ?>
 
-<?php endforeach; ?>
+    <?php endforeach; ?>

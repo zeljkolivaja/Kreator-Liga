@@ -1,1 +1,23 @@
-<?php var_dump($tablica); ?>
+
+
+
+<div class="grid-x">
+    <?php foreach($tablica as $vrsta): ?>
+    <div class="cell large-4">
+        <div class="success callout operateri">
+            <h4>Momcadi (id)</h4>
+            <h5><strong><?php echo $vrsta->homeTeam?> vs <?php echo $vrsta->awayTeam?>
+            <br/>
+            <h4>Rezultat susreta</h4>
+
+                <strong><?php echo $vrsta->homeTeamGoals?> : <?php echo $vrsta->awayTeamGoals?>
+                 </strong>
+                   
+                </strong></h5>
+ 
+
+        </div>
+    </div>
+
+    <?php endforeach; ?>
+</div>
