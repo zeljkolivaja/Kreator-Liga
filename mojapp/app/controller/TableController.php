@@ -16,7 +16,9 @@ public function __construct()
     {
         $view = new View();
         $view->render('tables/index',
-        ["tablica"=>Table::read($id)
+        ["tablica"=>Table::read($id),
+        "poruka"=>Table::readUpdate($id)
+
         ]
     );
     }

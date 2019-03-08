@@ -7,7 +7,7 @@
 
 
 
-    <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
+    <?php  if($play["Home"]==="slobodan" or $play["Away"]==="slobodan"){    
     continue;
 } ?>
     <label> Ime Kluba
@@ -30,11 +30,11 @@
 
 
     <label> <b> Bodovi u slučaju pobjede </b>
-        <input type="number" name="totalPoints1" value="<?php echo $bodovi ?>" readonly />
+        <input type="number" name="totalPointsWin" value="<?php echo $bodovi ?>" readonly />
     </label>
 
     <label> <b> Bodovi u slučaju nerješenog rezultata </b>
-        <input type="number" name="totalPoints2" value="<?php echo $bodovix ?>" readonly />
+        <input type="number" name="totalPointsDraw" value="<?php echo $bodovix ?>" readonly />
     </label>
 
     <label> <b> ID lige </b>
@@ -63,5 +63,6 @@
 
 </form>
 <?php  endforeach; ?>
+
 
     <?php endforeach; ?>

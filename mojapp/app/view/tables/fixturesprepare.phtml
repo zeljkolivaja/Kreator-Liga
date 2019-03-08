@@ -1,5 +1,5 @@
 <?php 
-$array = json_decode(json_encode($tablica), true); 
+$array = json_decode(json_encode($poruka), true); 
 $members = array_column($array , 'nameOfTeam');
 // print_r($members);
 
@@ -24,5 +24,6 @@ function scheduler($members){
     return $round;
 }
 $schedule = scheduler($members);
+ 
 
  ?>
