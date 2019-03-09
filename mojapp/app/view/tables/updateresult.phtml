@@ -6,7 +6,7 @@
 <form class="log-in-form" method="post" action="<?php echo App::config("url") ?>table/insert/">
 
 
-
+ 
     <?php  if($play["Home"]==="slobodan" or $play["Away"]==="slobodan"){    
     continue;
 } ?>
@@ -29,16 +29,16 @@
     </label>
 
 
-    <label> <b> Bodovi u slučaju pobjede </b>
-        <input type="number" name="totalPointsWin" value="<?php echo $bodovi ?>" readonly />
+    <label>
+        <input type="hidden" name="totalPointsWin" value="<?php echo $bodovi ?>" readonly />
     </label>
 
-    <label> <b> Bodovi u slučaju nerješenog rezultata </b>
-        <input type="number" name="totalPointsDraw" value="<?php echo $bodovix ?>" readonly />
+    <label>
+        <input type="hidden" name="totalPointsDraw" value="<?php echo $bodovix ?>" readonly />
     </label>
 
-    <label> <b> ID lige </b>
-        <input type="number" name="league" value="<?php echo $league ?>" readonly />
+    <label>
+        <input type="hidden" name="league" value="<?php echo $league ?>" readonly />
     </label>
 
 
@@ -56,8 +56,10 @@
 
         </div>
         <div style="padding: 10px;">
-            <input type="submit" class="success button" value="Dodaj klub" />
+            <input type="submit" class="success button" value="Dodaj utakmicu" />
         </div>
+
+
     </div>
     <br />
 

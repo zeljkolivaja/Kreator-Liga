@@ -46,7 +46,7 @@ public function __construct()
 
     function add()
     {
-            $kontrola = $this->kontrola();
+            $kontrola = $this->kontrolaadd();
             if($kontrola===true){
             Table::add();
             $this->home();
@@ -120,31 +120,88 @@ public function __construct()
              
         }
         
+        function kontrolainsert2(){
 
 
-        function kontrola()
-        {
-            if(Request::post("nameOfTeam")===""){
-                return "Ime tima je obavezno";
-            }
-     
-    
-    
-            if(strlen(Request::post("nameOfTeam"))>50){
-                return "Ime tima ne smije biti veći od 50 znakova";
-            }
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:homeTeam;");
+            $izraz->execute(self::podacigameHomeTeam());
+            $homeTeam = $izraz->fetchColumn();
+         
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:awayTeam;");
+            $izraz->execute(self::podacigameAwayTeam());
+            $awayTeam = $izraz->fetchColumn();
+        
      
     
             $db = Db::getInstance();
-            $izraz = $db->prepare("select count(id) from leagueTable where nameOfTeam=:nameOfTeam and id<>:id");
-            $izraz->execute(["nameOfTeam"=>Request::post("nameOfTeam"), "id" => $db->lastInsertId()]);
+            $izraz = $db->prepare("select id from game where homeTeam=$homeTeam and awayTeam=$awayTeam;");
+            $izraz->execute();
             $ukupno = $izraz->fetchColumn();
             if($ukupno>0){
-                return "Naziv tima već postoji, odaberite drugi";
+                // return "Utakmica je vec unesena";
+                // header('Location: http://localhost/mojapp/index');
+
+                $view = new View();
+                $view->render(
+                    'tables/editutakmice',
+                    [
+                    "poruka"=>$ukupno,
+                    ]
+                );
+                return;
+
             }
+
+          return true;
+
+
+        }
+
+        function kontrolainsert()
+        {
+            if(Request::post("homeTeamGoals")===""){
+                return "Golovi su obavezni";
+            }
+            
+            if(Request::post("awayTeamGoals")===""){
+                return "Golovi su obavezni";
+            }
+    
+
+            if(!ctype_digit(Request::post("awayTeamGoals"))){
+                return "Golovi moraju biti brojevi";
+            }
+
+            
+            if(!ctype_digit(Request::post("homeTeamGoals"))){
+                return "Golovi moraju biti brojevi";
+            }
+
+    
+    
     
             return true;
         }
+
+
+
+
+
+
+
+        function kontrolaadd()
+        {
+            if(Request::post("nameOfTeam")===""){
+                return "Ime ekipe je obavezno";
+            }
+
+    
+            return true;
+        }
+
+
 
         function kontrolaedit()
         {
@@ -172,12 +229,35 @@ public function __construct()
 
     
         function insert()
-        {
+        {        
+            $kontrola2 = $this->kontrolainsert2();
+            $kontrola = $this->kontrolainsert();
+
+            if($kontrola2===true){
              
+    }else{
+        return;
+        
+    }
+
+     if($kontrola===true){
+
                 Table::insert();
                 $this->home();
      
+    }else{
+        $view = new View();
+        $view->render(
+            'tables/poruka',
+            [
+            "poruka"=>$kontrola
+            ]
+        );
+
+
     }
+}
+
     
 
 
@@ -190,6 +270,54 @@ public function __construct()
     );
     }
 
+    
+
+
+
+    private static function podacigameHomeTeam(){
+        return [
+            "homeTeam"=>Request::post("homeTeam")
+      
+        ];
+    }
+    
+    
+    private static function podacigameAwayTeam(){
+        return [
+            "awayTeam"=>Request::post("awayTeam")
+      
+        ];
+    }
+
+
+
+    function kontrola()
+    {
+        if(Request::post("nameOfLeague")===""){
+            return "Ime lige je obavezno";
+        }
+
+        if(Request::post("gameType")===""){
+            return "Vrsta igre je obavezna";
+        } 
+
+
+
+        if(strlen(Request::post("nameOfLeague"))>50){
+            return "Ime lige ne smije biti veći od 50 znakova";
+        }
+
+        
+        return true;
+    }
+
+    function deleteutakmice($id)
+    {
+            Table::deleteutakmice($id);
+            $this->home();
+
+           
+    }
     
 
 }

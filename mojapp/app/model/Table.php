@@ -53,9 +53,9 @@ class Table{
     {
         $db = Db::getInstance();
         //online
-        // $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
+        $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
         //offline
-        $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
+        // $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
         $podaci = [];
         $podaci["id"]=$id;
         $izraz->execute($podaci);
@@ -165,8 +165,6 @@ private static function draw(){
 
 
 
-
-
 private static function podacigameHomeTeam(){
     return [
         "homeTeam"=>Request::post("homeTeam")
@@ -265,7 +263,6 @@ elseif ($homeGoals===$awayGoals) {
   
 }
 
-
  
     public static function rezultati($id)
     {
@@ -283,6 +280,163 @@ elseif ($homeGoals===$awayGoals) {
         $izraz->execute();
         return $izraz->fetchAll();
     }
+
+
+
+
+    public static function deleteutakmice($id)
+    {
+        
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select homeTeamGoals from game where id=:id;");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+        $homeGoals = $izraz->fetchColumn();
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select homeTeam from game where id=:id;");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+        $homeTeam = $izraz->fetchColumn();
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select homeTeamGoals from game where id=:id;");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+        $homeGoals = $izraz->fetchColumn();
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select awayTeamGoals from game where id=:id;");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+        $awayGoals = $izraz->fetchColumn();
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select league from game where id=:id;");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+        $league = $izraz->fetchColumn();
+
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select awayTeam from game where id=:id;");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+        $awayTeam = $izraz->fetchColumn();
+
+
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("
+            select
+            b.pointsPerWin
+            from league a inner join gameType b on b.id=a.gameType
+            where a.id=$league; 
+            ");
+        $izraz->execute();
+        $win = $izraz->fetchColumn();
+
+
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("
+            select
+            b.pointsPerDraw
+            from league a inner join gameType b on b.id=a.gameType
+            where a.id=$league; 
+            ");
+        $izraz->execute();
+        $draw = $izraz->fetchColumn();
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("update leagueTable set 
+        totalGoalsScored= totalGoalsScored - $homeGoals,
+        totalGoalsConceded=totalGoalsConceded - $awayGoals
+        where id=:id");
+        $podaci = [];
+        $podaci["id"]=$homeTeam;
+        $izraz->execute($podaci);
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("update leagueTable set 
+        totalGoalsScored= totalGoalsScored - $awayGoals,
+        totalGoalsConceded=totalGoalsConceded - $homeGoals
+        where id=:id");
+        $podaci = [];
+        $podaci["id"]=$awayTeam;
+        $izraz->execute($podaci);
+
+
+        if($homeGoals == $awayGoals){
+
+            $db = Db::getInstance();
+            $izraz = $db->prepare("update leagueTable set 
+            totalPoints=totalPoints - $draw
+             where id=:id");
+            $podaci = [];
+            $podaci["id"]=$homeTeam;
+            $izraz->execute($podaci); 
+            
+            $db = Db::getInstance();
+            $izraz = $db->prepare("update leagueTable set 
+            totalPoints=totalPoints - $draw
+             where id=:id");
+            $podaci = [];
+            $podaci["id"]=$awayTeam;
+            $izraz->execute($podaci);  
+
+        }
+
+
+        if($homeGoals > $awayGoals){
+
+            $db = Db::getInstance();
+            $izraz = $db->prepare("update leagueTable set 
+            totalPoints=totalPoints - $win
+             where id=:id");
+            $podaci = [];
+            $podaci["id"]=$homeTeam;
+            $izraz->execute($podaci);    
+
+        }
+
+        if($homeGoals < $awayGoals){
+
+            $db = Db::getInstance();
+            $izraz = $db->prepare("update leagueTable set 
+            totalPoints=totalPoints - $win
+             where id=:id");
+            $podaci = [];
+            $podaci["id"]=$awayTeam;
+            $izraz->execute($podaci);    
+
+        }
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("delete from game where id=:id");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+    }
+
+
+
+
 
  
 }
