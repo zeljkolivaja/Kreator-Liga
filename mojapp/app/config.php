@@ -1,7 +1,7 @@
 <?php
 //offline
 return [
-    "url"=>"http://localhost/mojappwebb/",
+    "url"=>"http://localhost/mojapp/",
     "dev"=>true,
     "nazivApp" => "Kreator Liga",
     "db"=> [

@@ -1,7 +1,6 @@
 <?php
 
-class Korisnik
-{
+class Korisnik{
 
     public static function read()
     {
@@ -40,8 +39,7 @@ class Korisnik
 
 
     
-    public static function find($id)
-    {
+    public static function find($id){
         $db = Db::getInstance();
         $izraz = $db->prepare("select * from users where id=:id");
         $izraz->execute(["id"=>$id]);
@@ -57,8 +55,7 @@ class Korisnik
     }
 
 
-    private static function podaci()
-    {
+    private static function podaci(){
         return [
             "administrator"=>Request::post("administrator")==="on" ? true : false,
             "firstName"=>Request::post("firstName"),

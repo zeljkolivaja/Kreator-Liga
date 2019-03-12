@@ -62,19 +62,19 @@ public function __construct()
     }
 }
     
-
-    function home()
-    {
+    function home(){
         $view = new View();
         $view->render(
             'lige/index',
             [
-            "popis"=>Lige::read()
+            "popis"=>Popis::read()
             ]
         );
     }
 
 
+
+     
 
     function prepareedit($id)
     {
@@ -120,25 +120,25 @@ public function __construct()
              
         }
         
-    function kontrolainsert2()
-        {
+        function kontrolainsert2(){
 
-        $db = Db::getInstance();
-        $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:homeTeam;");
-        $izraz->execute(self::podacigameHomeTeam());
-        $homeTeam = $izraz->fetchColumn();
+
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:homeTeam;");
+            $izraz->execute(self::podacigameHomeTeam());
+            $homeTeam = $izraz->fetchColumn();
+         
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:awayTeam;");
+            $izraz->execute(self::podacigameAwayTeam());
+            $awayTeam = $izraz->fetchColumn();
         
-        $db = Db::getInstance();
-        $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:awayTeam;");
-        $izraz->execute(self::podacigameAwayTeam());
-        $awayTeam = $izraz->fetchColumn();
-    
      
     
-        $db = Db::getInstance();
-        $izraz = $db->prepare("select id from game where homeTeam=$homeTeam and awayTeam=$awayTeam;");
-        $izraz->execute();
-        $ukupno = $izraz->fetchColumn();
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select id from game where homeTeam=$homeTeam and awayTeam=$awayTeam;");
+            $izraz->execute();
+            $ukupno = $izraz->fetchColumn();
             if($ukupno>0){
                 // return "Utakmica je vec unesena";
                 // header('Location: http://localhost/mojapp/index');
@@ -159,8 +159,8 @@ public function __construct()
 
         }
 
-    function kontrolainsert()
-     {
+        function kontrolainsert()
+        {
             if(Request::post("homeTeamGoals")===""){
                 return "Golovi su obavezni";
             }
@@ -178,24 +178,41 @@ public function __construct()
             if(!ctype_digit(Request::post("homeTeamGoals"))){
                 return "Golovi moraju biti brojevi";
             }
+
+    
     
     
             return true;
         }
 
 
-    function kontrolaadd()
+
+
+
+
+
+        function kontrolaadd()
         {
             if(Request::post("nameOfTeam")===""){
                 return "Ime ekipe je obavezno";
             }
 
+            $db = Db::getInstance();
+            $izraz = $db->prepare("select count(id) from leagueTable where nameOfTeam=:nameOfTeam and id<>:id");
+            $izraz->execute(["nameOfTeam"=>Request::post("nameOfTeam"), "id" => Request::post("id")]);
+            $ukupno = $izraz->fetchColumn();
+            if($ukupno>0){
+                return "Naziv tima već postoji, odaberite drugi";
+            }
+
+
+    
             return true;
         }
 
 
 
-    function kontrolaedit()
+        function kontrolaedit()
         {
             if(Request::post("nameOfTeam")===""){
                 return "Ime tima je obavezno";
@@ -220,7 +237,7 @@ public function __construct()
         }
 
     
-    function insert()
+        function insert()
         {        
             $kontrola2 = $this->kontrolainsert2();
             $kontrola = $this->kontrolainsert();
@@ -250,6 +267,7 @@ public function __construct()
     }
 }
 
+    
 
 
     function rezultati($id)
@@ -265,8 +283,7 @@ public function __construct()
 
 
 
-    private static function podacigameHomeTeam()
-    {
+    private static function podacigameHomeTeam(){
         return [
             "homeTeam"=>Request::post("homeTeam")
       
@@ -274,8 +291,7 @@ public function __construct()
     }
     
     
-    private static function podacigameAwayTeam()
-    {
+    private static function podacigameAwayTeam(){
         return [
             "awayTeam"=>Request::post("awayTeam")
       

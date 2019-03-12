@@ -1,10 +1,8 @@
 <?php
 
-class LigaController
-{
+class LigaController{
 
-    public function __construct()
-    {
+    public function __construct(){
         if(!Session::getInstance()->isLogiran()){
             $view = new View();
             $view->render('index',["poruka"=>"Nemate ovlasti"]);
@@ -12,44 +10,45 @@ class LigaController
         }
     }
 
-
-    function index()
-    {
+   
+    function index(){
         $view = new View();
         $view->render(
             'lige/index',
             [
-            "popis"=>Lige::read()
+            "popis"=>Popis::read()
             ]
         );
     }
-
-
     function delete($id)
-    {
-        Lige::delete($id);
+{
+        Popis::delete($id);
         $this->index();
-    }
+       
+        
+
+}
 
 
-function prepareAdd()
-    {
+function prepareadd()
+{
     $view = new View();
     $view->render(
         'lige/novaliga',
         [
-         "vrstasporta"=>Lige::readgametype()
+         "vrstasporta"=>Popis::readgametype()
         
           ]
-     );
-    }
+    );
+}
  
 
+
 function add()
-    {
+{
     $kontrola = $this->kontrola();
     if($kontrola===true){
-        Lige::add();
+        Popis::add();
         $this->index();
     }else{    $view = new View();
         $view->render(
@@ -59,13 +58,12 @@ function add()
             ]
         );
     }
-    }
+}
 
-
-function prepareEdit($id)
-    {
+function prepareedit($id)
+{
     $view = new View();
-    $korisnik = Lige::find($id);
+    $korisnik = Popis::find($id);
     $_POST["nameOfLeague"]=$korisnik->nameOfLeague;
     $_POST["users"]=$korisnik->users;
     $_POST["description"]=$korisnik->description;
@@ -79,15 +77,16 @@ function prepareEdit($id)
         "poruka"=>""
         ]
     );
-    }
+}
+
 
 
 function edit($id)
-    {
+{
     $_POST["id"]=$id;
     $kontrola = $this->kontrolaedit();
     if($kontrola===true){
-    Lige::update($id);
+    Popis::update($id);
     $this->index();
 }else{
     $view = new View();
@@ -97,10 +96,8 @@ function edit($id)
         "poruka"=>$kontrola
         ]
     );
-    }
-
-
-    }
+}
+}
     function kontrola()
     {
         if(Request::post("nameOfLeague")===""){
@@ -110,6 +107,7 @@ function edit($id)
         if(Request::post("gameType")===""){
             return "Vrsta igre je obavezna";
         } 
+
 
 
         if(strlen(Request::post("nameOfLeague"))>50){
@@ -129,7 +127,7 @@ function edit($id)
     }
 
 
-    function kontrolaEdit()
+    function kontrolaedit()
     {
         if(Request::post("nameOfLeague")===""){
             return "Ime lige je obavezno";
@@ -156,6 +154,12 @@ function edit($id)
 
         return true;
     }
+
+
+
+
+
+
 
 
  

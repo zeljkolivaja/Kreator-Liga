@@ -21,7 +21,7 @@
             <td><?php echo $korisnik->username ?></td>
 
             <td>
-                <a href="<?php echo App::config("url") ?>korisnik/prepareEdit/<?php echo $korisnik->id ?>">
+                <a href="<?php echo App::config("url") ?>korisnik/prepareedit/<?php echo $korisnik->id ?>">
                <i class="fas fa-edit fa-2x"></i>
                 </a>
                 <?php if($korisnik->ukupno==0): ?>
@@ -37,6 +37,6 @@
     </tbody>
     
 </table>
-<a href="<?php echo App::config("url") ?>korisnik/prepareAdd" class="success button expanded">
+<a href="<?php echo App::config("url") ?>korisnik/prepareadd" class="success button expanded">
     Dodaj novog korisnika
 </a>

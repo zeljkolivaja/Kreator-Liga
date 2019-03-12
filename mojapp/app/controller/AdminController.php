@@ -3,7 +3,7 @@ class AdminController
 {
     function prijava()
     {
-    $view = new View();
+        $view = new View();
         $view->render('prijava',["poruka"=>""]);
     }
 

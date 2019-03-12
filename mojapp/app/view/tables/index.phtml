@@ -62,9 +62,9 @@
     <?php foreach($schedule as $round => $games):?>
     <div class="cell large-3 small-6">
 
-
-        <b> <?php echo "Kolo: ".($round+1)."<BR>"; ?> </b>
-
+       
+    <b> <?php echo "Kolo: ".($round+1)."<BR>"; ?> </b>
+       
         <?php foreach($games AS $play){ ?>
         <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
            
@@ -98,7 +98,7 @@
 
 
 </div>
-
+ 
 <?php include_once "updateresult.phtml" ?>
 
 

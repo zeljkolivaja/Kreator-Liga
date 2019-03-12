@@ -16,7 +16,7 @@
             Tablica Lige
         </a>
 
-        <a href="<?php echo App::config("url") ?>table/prepareAdd/<?php echo $vrsta->id?>" class="success button">
+        <a href="<?php echo App::config("url") ?>table/prepareadd/<?php echo $vrsta->id?>" class="success button">
             Dodaj novi klub
         </a>
         <?php if($vrsta->ukupno==0): ?>
@@ -32,7 +32,7 @@
 
         <?php endif; ?>
 
-        <a href="<?php echo App::config("url") ?>liga/prepareEdit/<?php echo $vrsta->id?>" class="button warning">
+        <a href="<?php echo App::config("url") ?>liga/prepareedit/<?php echo $vrsta->id?>" class="button warning">
             Editiraj ligu
         </a>
 
@@ -52,7 +52,7 @@
 <div class="grid-container">
     <div class="grid-x align-center">
 
-        <a href="<?php echo App::config("url") ?>liga/prepareAdd/<?php echo Session::getInstance()->getUser()->firstName?>"
+        <a href="<?php echo App::config("url") ?>liga/prepareadd/<?php echo Session::getInstance()->getUser()->firstName?>"
         class="success button">
             Dodaj novu ligu
         </a>

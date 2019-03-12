@@ -4,8 +4,7 @@ $members = array_column($array , 'nameOfTeam');
 // print_r($members);
 
  
-function scheduler($members)
-{
+function scheduler($members){
     if (count($members)%2 != 0){
         array_push($members,"slobodan");
     }

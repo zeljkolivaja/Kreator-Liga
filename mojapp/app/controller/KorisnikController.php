@@ -1,16 +1,15 @@
 <?php
 
-class KorisnikController
-{
+class KorisnikController{
 
 public function __construct()
-    {
+{
     if(!Session::getInstance()->isLogiran()){
         $view = new View();
         $view->render('index',["poruka"=>"Nemate ovlasti"]);
         exit;
     }
-    }
+}
 
  
     function index()
@@ -21,7 +20,7 @@ public function __construct()
         $view->render('korisnici/index',
         ["korisnici"=>Korisnik::read()
         ]
-        );
+    );
     }
 
 
@@ -67,7 +66,7 @@ public function __construct()
     }
 
 
-    function prepareEdit($id)
+    function prepareedit($id)
     {
         $view = new View();
         $korisnik = Korisnik::find($id);
@@ -85,7 +84,7 @@ public function __construct()
     }
 
 
-    function prepareAdd()
+    function prepareadd()
     {
         $view = new View();
         $view->render(
