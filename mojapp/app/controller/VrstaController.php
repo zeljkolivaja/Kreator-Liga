@@ -1,8 +1,10 @@
 <?php
 
-class VrstaController{
+class VrstaController
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         if(!Session::getInstance()->isLogiran()){
             $view = new View();
             $view->render('index',["poruka"=>"Nemate ovlasti"]);
@@ -13,7 +15,8 @@ class VrstaController{
    
 
 
-    function index(){
+    function index()
+    {
         $view = new View();
         $view->render(
             'vrsteigara/index',

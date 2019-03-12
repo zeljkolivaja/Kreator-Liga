@@ -1,6 +1,7 @@
 <?php
 
-class IndexController{
+class IndexController
+{
     function index(){
         //echo "Hello";
 
