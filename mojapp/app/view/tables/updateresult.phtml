@@ -1,12 +1,15 @@
 <?php foreach($schedule as $round => $games): ?>
 
 <?php echo "Kolo: ".($round+1)."<br/>"."<hr/>"; ?>
+
 <?php foreach($games AS $play): ?>
+
+
 
 <form class="log-in-form" method="post" action="<?php echo App::config("url") ?>table/insert/">
 
 
- 
+
     <?php  if($play["Home"]==="slobodan" or $play["Away"]==="slobodan"){    
     continue;
 } ?>
@@ -44,9 +47,6 @@
 
 
 
-
-
-
     <div class="grid-x">
         <div style="padding: 10px;">
             <a href="#" class="alert button">
@@ -67,4 +67,4 @@
 <?php  endforeach; ?>
 
 
-    <?php endforeach; ?>
+<?php endforeach; ?>

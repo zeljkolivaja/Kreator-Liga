@@ -1,20 +1,19 @@
 <?php
 class AdminController
 {
+
     function prijava()
     {
         $view = new View();
         $view->render('prijava',["poruka"=>""]);
     }
 
+
     function login()
     {
-         
-
         $db=Db::getInstance();
         $izraz = $db->prepare("select id,firstName,lastName,username,password from users where username=:username");
         $izraz->execute(["username"=>Request::post("username")]);
-
         $view = new View();
 
         if($izraz->rowCount()>0){
@@ -36,18 +35,16 @@ class AdminController
         }else{
             $view->render('prijava',["poruka"=>"Ne postojeći email"]);
         }
-
-        
-
-         
-        
+               
     }
 
+    
     function odjava()
     {
-
         Session::getInstance()->odjava();
         $view = new View();
         $view->render('index',["poruka"=>""]);
     }
+
+
 }

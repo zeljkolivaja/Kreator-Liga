@@ -25,7 +25,6 @@ class Table{
     }
 
 
-
     public static function readUpdate($id)
     {
         $db = Db::getInstance();
@@ -48,14 +47,10 @@ class Table{
     }
 
 
-
     public static function delete($id)
     {
         $db = Db::getInstance();
-        //online
-        // $izraz = $db->prepare("delete from dioniz_liga . leagueTable where id=:id");
-        //offline
-        $izraz = $db->prepare("delete from dionizliga . leagueTable where id=:id");
+        $izraz = $db->prepare("delete from leagueTable where id=:id");
         $podaci = [];
         $podaci["id"]=$id;
         $izraz->execute($podaci);
@@ -71,7 +66,30 @@ class Table{
     }
 
 
-    private static function podaci(){
+    public static function resetiraj($id)
+    {
+        $db = Db::getInstance();        
+        $izraz = $db->prepare("delete from game where league=:id");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("update leagueTable set 
+        totalPoints=0,
+        totalGoalsScored=0,
+        totalGoalsConceded=0
+        where league=:id");
+        $podaci = [];
+        $podaci["id"]=$id;
+        $izraz->execute($podaci);
+
+    }
+
+
+    private static function podaci()
+    {
         return [
             "nameOfTeam"=>Request::post("nameOfTeam"),
             "league"=>Request::post("league")
@@ -79,13 +97,14 @@ class Table{
     }
 
 
-
-    public static function find($id){
+    public static function find($id)
+    {
         $db = Db::getInstance();
         $izraz = $db->prepare("select * from leagueTable where id=:id");
         $izraz->execute(["id"=>$id]);
         return $izraz->fetch();
     }
+
 
     public static function update($id)
     {
@@ -102,9 +121,9 @@ class Table{
         $izraz->execute($podaci);
     }
     
-    
 
-    private static function podaciupdate(){
+    private static function podaciupdate()
+    {
         return [
             "nameOfTeam"=>Request::post("nameOfTeam"),
             "totalPoints"=>Request::post("totalPoints"),
@@ -113,25 +132,22 @@ class Table{
             "league"=>Request::post("league")
      
         ];
-    
- 
-
 }
 
-private static function podacigame(){
+
+private static function podacigame()
+{
     return [
         "homeTeamGoals"=>Request::post("homeTeamGoals"),
         "awayTeamGoals"=>Request::post("awayTeamGoals"),
         "league"=>Request::post("league")
-
- 
     ];
 }
 
 
 
-
-private static function podaciUpdateHome(){
+private static function podaciUpdateHome()
+{
     return [
          "homeTeamGoals"=>Request::post("homeTeamGoals"),
         "awayTeamGoals"=>Request::post("awayTeamGoals"),
@@ -142,7 +158,9 @@ private static function podaciUpdateHome(){
     ];
 }
 
-private static function podaciUpdateAwayLost(){
+
+private static function podaciUpdateAwayLost()
+{
     return [
         "homeTeamGoals"=>Request::post("homeTeamGoals"),
         "awayTeamGoals"=>Request::post("awayTeamGoals"),
@@ -152,7 +170,9 @@ private static function podaciUpdateAwayLost(){
     ];
 }
 
-private static function draw(){
+
+private static function draw()
+{
     return [
         "homeTeamGoals"=>Request::post("homeTeamGoals"),
         "totalPointsDraw"=>Request::post("totalPointsDraw"),
@@ -164,8 +184,8 @@ private static function draw(){
 
 
 
-
-private static function podacigameHomeTeam(){
+private static function podacigameHomeTeam()
+{
     return [
         "homeTeam"=>Request::post("homeTeam")
   
@@ -173,7 +193,8 @@ private static function podacigameHomeTeam(){
 }
 
 
-private static function podacigameAwayTeam(){
+private static function podacigameAwayTeam()
+{
     return [
         "awayTeam"=>Request::post("awayTeam")
   
@@ -204,7 +225,8 @@ public static function insert()
 
 //update rezultata (leaguetable)
 
-if ($homeGoals > $awayGoals) {
+    if ($homeGoals > $awayGoals) 
+    {
     $izraz = $db->prepare("update leagueTable set 
     totalPoints=totalPoints + :totalPointsWin,
     totalGoalsScored=totalGoalsScored + :homeTeamGoals,
@@ -222,7 +244,7 @@ if ($homeGoals > $awayGoals) {
     $izraz->execute(self::podaciUpdateAwayLost());
 
 
-}elseif ($homeGoals<$awayGoals) {
+    }elseif ($homeGoals<$awayGoals){
     $izraz = $db->prepare("update leagueTable set 
     totalPoints=totalPoints + :totalPointsWin,
     totalGoalsScored=totalGoalsScored + :awayTeamGoals,
@@ -239,8 +261,8 @@ if ($homeGoals > $awayGoals) {
     $izraz->execute(self::podaciUpdateAwayLost());
 
     
-}
-elseif ($homeGoals===$awayGoals) {
+    }
+    elseif ($homeGoals===$awayGoals) {
     $izraz = $db->prepare("update leagueTable set 
     totalPoints=totalPoints + :totalPointsDraw,
     totalGoalsScored=totalGoalsScored + :homeTeamGoals,
@@ -256,12 +278,10 @@ elseif ($homeGoals===$awayGoals) {
     league=:league
     where id=$awayTeam");
     $izraz->execute(self::draw());
-
     
-}
-
-  
-}
+    }
+ 
+    }
 
  
     public static function rezultati($id)
@@ -282,12 +302,9 @@ elseif ($homeGoals===$awayGoals) {
     }
 
 
-
-
     public static function deleteutakmice($id)
     {
         
-
         $db = Db::getInstance();
         $izraz = $db->prepare("select homeTeamGoals from game where id=:id;");
         $podaci = [];
@@ -346,8 +363,6 @@ elseif ($homeGoals===$awayGoals) {
             ");
         $izraz->execute();
         $win = $izraz->fetchColumn();
-
-
 
 
         $db = Db::getInstance();
@@ -435,8 +450,4 @@ elseif ($homeGoals===$awayGoals) {
     }
 
 
-
-
-
- 
 }

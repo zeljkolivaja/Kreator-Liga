@@ -1,8 +1,10 @@
 <?php
 
-class Popis{
+class Popis
+{
 
-    public static function read(){
+    public static function read()
+    {
         $db = Db::getInstance();
         $izraz = $db->prepare("select
 		a.nameOfLeague,
@@ -28,12 +30,13 @@ class Popis{
     }
 
 
-public static function find($id){
+public static function find($id)
+{
         $db = Db::getInstance();
         $izraz = $db->prepare("select * from league where id=:id");
         $izraz->execute(["id"=>$id]);
         return $izraz->fetch();
-    }
+}
 
 
 
@@ -48,7 +51,8 @@ public static function find($id){
 
 
 
-public static function readgametype(){
+public static function readgametype()
+{
     $db = Db::getInstance();
     $izraz = $db->prepare("select id,gameName from gameType");
     $izraz->execute();
@@ -86,7 +90,8 @@ public static function update($id)
 
  
 
-private static function podaci(){
+private static function podaci()
+{
     return [
         "nameOfLeague"=>Request::post("nameOfLeague"),
         "description"=>Request::post("description"),
@@ -99,7 +104,8 @@ private static function podaci(){
 }
 
 
-private static function podaciupdate(){
+private static function podaciupdate()
+{
     return [
         "nameOfLeague"=>Request::post("nameOfLeague"),
         "description"=>Request::post("description"),

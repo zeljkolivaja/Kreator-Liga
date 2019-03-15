@@ -1,6 +1,7 @@
 <?php
 
-class Session{
+class Session
+{
     private static $instance;
     private $user;
     public function __construct(){
@@ -11,21 +12,25 @@ class Session{
         }
     }
 
-    public function login($user){
+    public function login($user)
+    {
         $this->user=$user;
         $_SESSION['logiran'] = true;
         $_SESSION["user"] = $user;
     }
 
-    public function getUser(){
+    public function getUser()
+    {
         return $this->user;
     }
     
-    public function odjava(){
+    public function odjava()
+    {
          unset($_SESSION['logiran']);
         }
 
-    function isLogiran(){
+    function isLogiran()
+    {
         return isset($_SESSION['logiran']) ? true : false;
     }
 

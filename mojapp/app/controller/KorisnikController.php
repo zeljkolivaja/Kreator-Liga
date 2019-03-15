@@ -1,15 +1,16 @@
 <?php
 
-class KorisnikController{
+class KorisnikController
+{
 
 public function __construct()
-{
+    {
     if(!Session::getInstance()->isLogiran()){
         $view = new View();
         $view->render('index',["poruka"=>"Nemate ovlasti"]);
         exit;
+        }
     }
-}
 
  
     function index()
@@ -32,7 +33,6 @@ public function __construct()
     }
 
 
-
     function kontrola()
     {
         if(Request::post("username")===""){
@@ -48,7 +48,6 @@ public function __construct()
         }
 
 
-
         if(strlen(Request::post("username"))>50){
             return "Korisničko ime ne smije biti veći od 50 znakova";
         }
@@ -60,7 +59,6 @@ public function __construct()
         if($ukupno>0){
             return "Ime postoji, odaberite drugo";
         }
-
 
         return true;
     }
@@ -95,6 +93,7 @@ public function __construct()
         );
     }
 
+
     function add()
     {
         
@@ -113,9 +112,7 @@ public function __construct()
         }
 
     }
-
-    
-
+   
 
     function edit($id)
     {
