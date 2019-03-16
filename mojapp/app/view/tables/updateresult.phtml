@@ -1,70 +1,91 @@
+<?php 
+ $a=0; 
+ $b=0; 
+ $c=0; 
+ $d=0; ?>
 <?php foreach($schedule as $round => $games): ?>
+<br />
+<?php echo "Kolo: ".($round+1)."<br/>"?>
 
-<?php echo "Kolo: ".($round+1)."<br/>"."<hr/>"; ?>
+
+<?php $e=0; ?>
+
 
 <?php foreach($games AS $play): ?>
-
-
-
-<form class="log-in-form" method="post" action="<?php echo App::config("url") ?>table/insert/">
-
-
-
-    <?php  if($play["Home"]==="slobodan" or $play["Away"]==="slobodan"){    
+<?php  if($play["Home"]==="slobodan" or $play["Away"]==="slobodan"){
     continue;
-} ?>
-    <label> Ime Kluba
-        <input type="text" name="homeTeam" value="<?php echo $play["Home"] ?>" readonly />
-    </label>
+}  ?>
 
-    <label><b> Postignuti Golovi kluba <?php echo $play["Home"] ?> </b>
-        <input type="number" name="homeTeamGoals" />
-    </label>
+<button onclick="myFunction<?php echo $a+=1;?>()"><?php echo $play["Home"] . " vs " . $play["Away"] ; ?></button>
+<br />
+<div id="myDIV<?php echo $b+=1;?>" style="display:none;">
 
-
-    <label> Ime Kluba
-        <input type="text" name="awayTeam" value="<?php echo $play["Away"] ?>" readonly />
-    </label>
-
-
-    <label> <b> Postignuti Golovi kluba <?php echo $play["Away"] ?> </b>
-        <input type="number" name="awayTeamGoals" />
-    </label>
+    <script>
+    function myFunction<?php echo $c+=1; ?>() {
+        var x = document.getElementById("myDIV<?php echo $d+=1; ?>");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    </script>
 
 
-    <label>
-        <input type="hidden" name="totalPointsWin" value="<?php echo $bodovi ?>" readonly />
-    </label>
+    <form class="log-in-form" method="post" action="<?php echo App::config("url") ?>table/insert/">
 
-    <label>
-        <input type="hidden" name="totalPointsDraw" value="<?php echo $bodovix ?>" readonly />
-    </label>
+        <label> Ime Kluba
+            <input type="text" name="homeTeam" value="<?php echo $play["Home"] ?>" readonly />
+        </label>
 
-    <label>
-        <input type="hidden" name="league" value="<?php echo $league ?>" readonly />
-    </label>
+        <label><b> Postignuti Golovi kluba <?php echo $play["Home"] ?> </b>
+            <input type="number" name="homeTeamGoals" />
+        </label>
 
 
+        <label> Ime Kluba
+            <input type="text" name="awayTeam" value="<?php echo $play["Away"] ?>" readonly />
+        </label>
 
 
-    <div class="grid-x">
-        <div style="padding: 10px;">
-            <a href="#" class="alert button">
-                Odustani
-            </a>
+        <label> <b> Postignuti Golovi kluba <?php echo $play["Away"] ?> </b>
+            <input type="number" name="awayTeamGoals" />
+        </label>
+
+
+        <label>
+            <input type="hidden" name="totalPointsWin" value="<?php echo $bodovi ?>" readonly />
+        </label>
+
+        <label>
+            <input type="hidden" name="totalPointsDraw" value="<?php echo $bodovix ?>" readonly />
+        </label>
+
+        <label>
+            <input type="hidden" name="league" value="<?php echo $league ?>" readonly />
+        </label>
+
+
+
+
+        <div class="grid-x">
+            <div style="padding: 10px;">
+                <a href="#" class="alert button">
+                    Odustani
+                </a>
+
+
+            </div>
+            <div style="padding: 10px;">
+                <input type="submit" class="success button" value="Dodaj utakmicu" />
+            </div>
 
 
         </div>
-        <div style="padding: 10px;">
-            <input type="submit" class="success button" value="Dodaj utakmicu" />
-        </div>
+        <br />
 
+    </form>
+</div>
 
-    </div>
-    <br />
-
-</form>
 <?php  endforeach; ?>
-
-
 <?php endforeach; ?>

@@ -1,5 +1,6 @@
 <?php
-final class App{
+final class App
+{
 
     static function start()
     {

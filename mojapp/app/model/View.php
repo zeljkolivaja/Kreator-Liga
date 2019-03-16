@@ -1,14 +1,17 @@
 <?php
 
-class View{
+class View
+{
 
     private $layout;
 
-    public function __construct($layout="layout"){
+    public function __construct($layout="layout")
+    {
         $this->layout = basename($layout);
     }
 
-    public function render($name,$args=[]){
+    public function render($name,$args=[])
+    {
         ob_start();
         extract($args);
         include BP . "app/view/$name.phtml";
