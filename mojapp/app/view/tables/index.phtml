@@ -13,7 +13,11 @@
         <thead>
             <tr>
                 <th width="200">Klub</th>
+                <th width="100">Utakmice</th>
                 <th width="100">Osvojeni Bodovi</th>
+                <th width="100" class="hide-for-small-only">Pobjede</th>
+                <th width="100" class="hide-for-small-only">Porazi</th>
+                <th width="100" class="hide-for-small-only">Nerješene</th>
                 <th width="100" class="hide-for-small-only">Zabijeni golovi</th>
                 <th width="100" class="hide-for-small-only">Primljeni golovi</th>
                 <th width="100">Obriši klub</th>
@@ -24,7 +28,11 @@
             <?php foreach($tablica as $podaci): ?>
             <tr>
                 <td><?php echo $podaci->nameOfTeam?></td>
+                <td><?php echo $podaci->totalGamesPlayed?></td>
                 <td><?php echo $podaci->totalPoints?></td>
+                <td class="hide-for-small-only"><?php echo $podaci->totalWins?></td>
+                <td class="hide-for-small-only"><?php echo $podaci->totalLosses?></td>
+                <td class="hide-for-small-only"><?php echo $podaci->totalDraws?></td>
                 <td class="hide-for-small-only"><?php echo $podaci->totalGoalsScored?></td>
                 <td class="hide-for-small-only"><?php echo $podaci->totalGoalsConceded?></td>
                 <td><a style="color: red;"
@@ -109,3 +117,6 @@
 
 
 </div>
+
+
+<?php var_dump($tablica) ?>

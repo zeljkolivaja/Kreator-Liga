@@ -11,6 +11,10 @@ class Table{
         a.nameOfTeam,
         a.totalPoints,
         a.totalGoalsScored,
+        a.totalGamesPlayed,
+        a.totalWins,
+        a.totalLosses,
+        a.totalDraws,
         a.totalGoalsConceded,
         b.nameOfLeague,
         c.pointsPerWin,
@@ -78,6 +82,10 @@ class Table{
         $db = Db::getInstance();
         $izraz = $db->prepare("update leagueTable set 
         totalPoints=0,
+        totalWins=0,
+        totalDraws=0,
+        totalLosses=0,
+        totalGamesPlayed=0,
         totalGoalsScored=0,
         totalGoalsConceded=0
         where league=:id");
@@ -200,6 +208,16 @@ private static function podacigameAwayTeam()
   
     ];
 }
+
+
+private static function games()
+{
+    return [
+        "games"=>Request::post("games")
+  
+    ];
+}
+
  
 
 public static function insert()
@@ -219,8 +237,9 @@ public static function insert()
     values (:homeTeamGoals,:awayTeamGoals,:league,$homeTeam,$awayTeam);");
     $izraz->execute(self::podacigame());
 
-     $homeGoals = Request::post("homeTeamGoals");
+    $homeGoals = Request::post("homeTeamGoals");
     $awayGoals = Request::post("awayTeamGoals");
+    $games ="1";
  
 
 //update rezultata (leaguetable)
@@ -231,6 +250,8 @@ public static function insert()
     totalPoints=totalPoints + :totalPointsWin,
     totalGoalsScored=totalGoalsScored + :homeTeamGoals,
     totalGoalsConceded=totalGoalsConceded + :awayTeamGoals,
+    totalGamesPlayed=totalGamesPlayed+$games,
+    totalWins=totalWins + $games,
     league=:league
     where id=$homeTeam");
     $izraz->execute(self::podaciUpdateHome());
@@ -239,6 +260,8 @@ public static function insert()
     $izraz = $db->prepare("update leagueTable set 
     totalGoalsScored=totalGoalsScored + :awayTeamGoals,
     totalGoalsConceded=totalGoalsConceded + :homeTeamGoals,
+    totalGamesPlayed=totalGamesPlayed+$games,
+    totalLosses=totalLosses + $games,
     league=:league
     where id=$awayTeam");
     $izraz->execute(self::podaciUpdateAwayLost());
@@ -247,6 +270,8 @@ public static function insert()
     }elseif ($homeGoals<$awayGoals){
     $izraz = $db->prepare("update leagueTable set 
     totalPoints=totalPoints + :totalPointsWin,
+    totalWins=totalWins + $games,
+    totalGamesPlayed=totalGamesPlayed+$games,
     totalGoalsScored=totalGoalsScored + :awayTeamGoals,
     totalGoalsConceded=totalGoalsConceded + :homeTeamGoals,
     league=:league
@@ -256,6 +281,8 @@ public static function insert()
     $izraz = $db->prepare("update leagueTable set 
     totalGoalsScored=totalGoalsScored + :homeTeamGoals,
     totalGoalsConceded=totalGoalsConceded + :awayTeamGoals,
+    totalGamesPlayed=totalGamesPlayed+$games,
+    totalLosses=totalLosses + $games,
     league=:league
     where id=$homeTeam");
     $izraz->execute(self::podaciUpdateAwayLost());
@@ -265,14 +292,18 @@ public static function insert()
     elseif ($homeGoals===$awayGoals) {
     $izraz = $db->prepare("update leagueTable set 
     totalPoints=totalPoints + :totalPointsDraw,
+    totalGamesPlayed=totalGamesPlayed+$games,
     totalGoalsScored=totalGoalsScored + :homeTeamGoals,
     totalGoalsConceded=totalGoalsConceded + :awayTeamGoals,
+    totalDraws=totalDraws + $games,
     league=:league
     where id=$homeTeam");
     $izraz->execute(self::draw());
 
     $izraz = $db->prepare("update leagueTable set 
     totalPoints=totalPoints + :totalPointsDraw,
+    totalGamesPlayed=totalGamesPlayed+$games,
+    totalDraws=totalDraws + $games,
     totalGoalsScored=totalGoalsScored + :awayTeamGoals,
     totalGoalsConceded=totalGoalsConceded + :homeTeamGoals,
     league=:league
@@ -350,7 +381,7 @@ public static function insert()
         $podaci["id"]=$id;
         $izraz->execute($podaci);
         $awayTeam = $izraz->fetchColumn();
-
+        $games=1;
 
 
 
@@ -374,6 +405,8 @@ public static function insert()
             ");
         $izraz->execute();
         $draw = $izraz->fetchColumn();
+
+
 
 
         $db = Db::getInstance();
@@ -400,7 +433,9 @@ public static function insert()
 
             $db = Db::getInstance();
             $izraz = $db->prepare("update leagueTable set 
-            totalPoints=totalPoints - $draw
+            totalPoints=totalPoints - $draw,
+            totalGamesPlayed=totalGamesPlayed - $games,
+            totalDraws=totalDraws - $games
              where id=:id");
             $podaci = [];
             $podaci["id"]=$homeTeam;
@@ -408,7 +443,9 @@ public static function insert()
             
             $db = Db::getInstance();
             $izraz = $db->prepare("update leagueTable set 
-            totalPoints=totalPoints - $draw
+            totalPoints=totalPoints - $draw,
+            totalGamesPlayed=totalGamesPlayed - $games,
+            totalDraws=totalDraws - $games
              where id=:id");
             $podaci = [];
             $podaci["id"]=$awayTeam;
@@ -421,11 +458,25 @@ public static function insert()
 
             $db = Db::getInstance();
             $izraz = $db->prepare("update leagueTable set 
-            totalPoints=totalPoints - $win
+            totalPoints=totalPoints - $win,
+            totalGamesPlayed=totalGamesPlayed - $games,
+            totalWins=totalWins - $games
              where id=:id");
             $podaci = [];
             $podaci["id"]=$homeTeam;
             $izraz->execute($podaci);    
+
+
+
+            $db = Db::getInstance();
+            $izraz = $db->prepare("update leagueTable set 
+            totalLosses=totalLosses - $games,
+            totalGamesPlayed=totalGamesPlayed - $games
+             where id=:id");
+            $podaci = [];
+            $podaci["id"]=$awayTeam;
+            $izraz->execute($podaci);    
+
 
         }
 
@@ -433,11 +484,24 @@ public static function insert()
 
             $db = Db::getInstance();
             $izraz = $db->prepare("update leagueTable set 
-            totalPoints=totalPoints - $win
-             where id=:id");
+            totalPoints=totalPoints - $win,
+            totalGamesPlayed=totalGamesPlayed - $games,
+            totalWins=totalWins - $games
+            where id=:id");
             $podaci = [];
             $podaci["id"]=$awayTeam;
-            $izraz->execute($podaci);    
+            $izraz->execute($podaci);   
+            
+            
+
+            $db = Db::getInstance();
+            $izraz = $db->prepare("update leagueTable set 
+            totalLosses=totalLosses - $games,
+            totalGamesPlayed=totalGamesPlayed - $games
+             where id=:id");
+            $podaci = [];
+            $podaci["id"]=$homeTeam;
+            $izraz->execute($podaci);  
 
         }
 
