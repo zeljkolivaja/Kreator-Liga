@@ -1,6 +1,6 @@
 *{
     font-family: 'vladarhserif';
-    color: brown;
+    color: rgb(0, 0, 0);
 
 }
 
@@ -128,3 +128,4 @@ body > div > div:nth-child(1) > div.large-2.medium-2.columns.hide-for-small-only
 .fa-edit{
     color:green !important;
 }
+ 

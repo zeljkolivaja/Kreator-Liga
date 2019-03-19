@@ -5,7 +5,7 @@
 
 
 
-    <table>
+    <table class="hover">
         <caption>
             <h4>Ljestvica</h4>
         </caption>
@@ -28,14 +28,14 @@
             <?php foreach($tablica as $podaci): ?>
             <tr>
                 <td><?php echo $podaci->nameOfTeam?></td>
-                <td><?php echo $podaci->totalGamesPlayed?></td>
-                <td><?php echo $podaci->totalPoints?></td>
-                <td class="hide-for-small-only"><?php echo $podaci->totalWins?></td>
-                <td class="hide-for-small-only"><?php echo $podaci->totalLosses?></td>
-                <td class="hide-for-small-only"><?php echo $podaci->totalDraws?></td>
-                <td class="hide-for-small-only"><?php echo $podaci->totalGoalsScored?></td>
-                <td class="hide-for-small-only"><?php echo $podaci->totalGoalsConceded?></td>
-                <td><a style="color: red;"
+                <td style="text-align:left"><?php echo $podaci->totalGamesPlayed?></td>
+                <td style="text-align:left"><?php echo $podaci->totalPoints?></td>
+                <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalWins?></td>
+                <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalLosses?></td>
+                <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalDraws?></td>
+                <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalGoalsScored?></td>
+                <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalGoalsConceded?></td>
+                <td style="text-align:left"><a style="color: red;"
                         href="<?php echo App::config("url") ?>table/delete/<?php echo $podaci->id ?>">
                         <i class="fas fa-trash fa-2x"></i>
                         <a href="<?php echo App::config("url") ?>table/prepareedit/<?php echo $podaci->id ?>">
@@ -66,28 +66,30 @@
 
 
 
-    <div class="cell large-12"> Raspored odigravanja utakmica:  </div>
+    <div class="cell large-12"> <b>Raspored odigravanja utakmica:</b>
+        <hr>
+    </div>
     <br />
     <?php foreach($schedule as $round => $games):?>
     <div class="cell large-3 small-6">
 
-       
-    <b> <?php echo "Kolo: ".($round+1)."<BR>"; ?> </b>
-       
+
+        <b> <?php echo "Kolo: ".($round+1)."<BR>"; ?> </b>
+
         <?php foreach($games AS $play){ ?>
         <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
            
            if($play["Home"]!=="slobodan"){
-               echo "<b>";
+               
                echo  $play["Home"]. " preskace ovo kolo"."<BR>";
-               echo "</b>";
+            
 
            }
 
            if($play["Away"]!=="slobodan"){
-            echo "<b>";
+          
             echo  $play["Away"]. " preskace ovo kolo"."<BR>";
-            echo "</b>";        }
+                  }
 
            
            continue;        
@@ -107,16 +109,10 @@
 
 
 </div>
- 
+
 <?php include_once "updateresult.phtml" ?>
 
 
 </div>
 
-
-
-
 </div>
-
-
-<?php var_dump($tablica) ?>

@@ -1,3 +1,5 @@
+<b>Unos rezultata: </b>
+<hr>
 <?php 
  $a=0; 
  $b=0; 
@@ -5,7 +7,9 @@
  $d=0; ?>
 <?php foreach($schedule as $round => $games): ?>
 <br />
-<?php echo "Kolo: ".($round+1)."<br/>"?>
+
+
+<b> <?php echo "Kolo: ".($round+1)."<br/>"?> </b>
 
 
 <?php $e=0; ?>
@@ -16,7 +20,7 @@
     continue;
 }  ?>
 
-<button onclick="myFunction<?php echo $a+=1;?>()"><?php echo $play["Home"] . " vs " . $play["Away"] ; ?></button>
+<button title="kliknite za unos" onclick="myFunction<?php echo $a+=1;?>()"><?php echo $play["Home"] . " vs " . $play["Away"] ; ?></button>
 <br />
 <div id="myDIV<?php echo $b+=1;?>" style="display:none;">
 
