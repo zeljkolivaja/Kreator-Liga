@@ -1,0 +1,22 @@
+<table class="hover">
+
+<thead>
+    <tr>
+        <th width="100">Ime Igrača</th>
+        <th width="100">Prezime Igrača</th>
+        <th width="100">Id Igrača</th>
+    </tr>
+</thead>
+<tbody>
+    <?php foreach($popis as $podaci): ?>
+    <tr>
+        <td><?php echo $podaci->firstName?></td>
+        <td><?php echo $podaci->lastName?></td>
+        <td><?php echo $podaci->id?></td>
+
+    </tr>
+
+    <?php endforeach; ?>
+
+</tbody>
+</table>

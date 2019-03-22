@@ -1,0 +1,15 @@
+
+
+<h3>Izaberite vašu ligu </h3>
+
+<?php foreach($popis as $imelige): ?>
+<a href="<?php echo App::config("url") ?>igraci/klubovi/<?php echo $imelige->id?>" class="button">
+<?php echo $imelige->nameOfLeague; ?>
+        </a>
+<?php echo "<br/>"; ?>
+<?php endforeach ; ?>
+
+
+
+
+ 

@@ -15,15 +15,44 @@ class TableController
  
     function index($id)
     {
+        $array = json_decode(json_encode(Table::readUpdate($id)), true); 
+        $members = array_column($array , 'nameOfTeam');
+        // print_r($members);
+        
+         
+        function scheduler($members){
+            if (count($members)%2 != 0){
+                array_push($members,"slobodan");
+            }
+            $away = array_splice($members,(count($members)/2));
+            $home = $members;
+            for ($i=0; $i < count($home)+count($away)-1; $i++){
+                for ($j=0; $j<count($home); $j++){
+                    $round[$i][$j]["Home"]=$home[$j];
+                    $round[$i][$j]["Away"]=$away[$j];
+                }
+                if(count($home)+count($away)-1 > 2){
+                    // array_unshift($away,array_shift(array_splice($home,1,1)));
+                    array_unshift($away, current(array_splice($home,1,1)) ); 
+                    array_push($home,array_pop($away));
+                }
+            }
+            return $round;
+        }
+        $schedule = scheduler($members);
+    
+
         $view = new View();
         $view->render('tables/index',
         ["tablica"=>Table::read($id),
-        "poruka"=>Table::readUpdate($id)
-
+        "schedule"=>$schedule
         ]
     );
     }
     
+    
+
+
 
     function delete($id)
     {

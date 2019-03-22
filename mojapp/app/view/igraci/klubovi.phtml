@@ -1,0 +1,35 @@
+ <table class="hover">
+
+     <thead>
+         <tr>
+             <th width="100">Klub</th>
+             <th width="100">Unesi igrače</th>
+             <th width="100">Popis igrača</th>
+         </tr>
+     </thead>
+     <tbody>
+         <?php foreach($popis as $podaci): ?>
+         <tr>
+             <td><?php echo $podaci->nameOfTeam?></td>
+             <td style="text-align:left">
+
+                 <a href="<?php echo App::config("url") ?>igraci/prepareinsert/<?php echo $podaci->id ?>">
+                     <i class="fas fa-edit fa-2x"></i>
+                 </a>
+
+             </td>
+
+             <td style="text-align:left">
+
+                 <a href="<?php echo App::config("url") ?>igraci/lista/<?php echo $podaci->id ?>">
+                     <i class="fas fa-edit fa-2x"></i>
+                 </a>
+
+             </td>
+
+         </tr>
+
+         <?php endforeach; ?>
+
+     </tbody>
+ </table>

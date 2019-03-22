@@ -1,0 +1,34 @@
+<form class="log-in-form" method="post"
+    action="<?php echo App::config("url") ?>igraci/insert">
+
+    <label>Ime Igrača
+        <input type="text" name="firstName"/>
+    </label>
+
+    
+    <label>Prezime Igrača
+        <input type="text" name="lastName"/>
+    </label>
+
+    <label> 
+        <input type="hidden" name="LeagueTable" value="<?php echo $popis ?>" />
+    </label>
+
+
+    <div class="grid-x">
+        <div class="large-6 columns" style="padding: 10px;">
+            <a href="<?php echo App::config("url") ?>igraci/index" class="alert button expanded">
+                Odustani
+            </a>
+            
+
+        </div>
+        <div class="large-6 columns" style="padding: 10px;">
+            <input type="submit" class="success button expanded" value="Dodaj Igrača" />
+        </div>
+    </div>
+
+</form>
+
+
+ 
