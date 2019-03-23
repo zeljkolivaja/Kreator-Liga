@@ -2,17 +2,38 @@
 
 <thead>
     <tr>
-        <th width="100">Ime Igrača</th>
-        <th width="100">Prezime Igrača</th>
-        <th width="100">Id Igrača</th>
+        <th width="100">Ime igrača</th>
+        <th width="100">Prezime igrača</th>
+        <th width="100">Editiraj igrača</th>
+        <th width="100">Golovi</th>
+        <th width="100">Crveni kartoni</th>
+        <th width="100">Žuti kartoni</th>
+        <th width="100">Obriši igrača</th>
     </tr>
 </thead>
 <tbody>
     <?php foreach($popis as $podaci): ?>
     <tr>
         <td><?php echo $podaci->firstName?></td>
-        <td><?php echo $podaci->lastName?></td>
-        <td><?php echo $podaci->id?></td>
+        <td><?php echo $podaci->lastName?></td>   
+        <td style="text-align:left">
+
+<a href="<?php echo App::config("url") ?>igraci/prepareEdit/<?php echo $podaci->id ?>">
+    <i class="fas fa-edit fa-2x"></i>
+</a>
+
+</td>
+
+        <td><?php echo $podaci->totalGoalsScored?></td>
+        <td><?php echo $podaci->totallRedCards?></td>
+        <td><?php echo $podaci->totallYellowCards?></td>
+        <td style="text-align:left">
+
+<a href="<?php echo App::config("url") ?>igraci/delete/<?php echo $podaci->id ?>">
+<i class="fas fa-trash fa-2x"></i>
+</a>
+
+</td>
 
     </tr>
 
@@ -20,3 +41,5 @@
 
 </tbody>
 </table>
+
+ 

@@ -1,0 +1,57 @@
+
+<?php foreach($popis as $podaci): ?>
+
+<form class="log-in-form" method="post"
+    action="<?php echo App::config("url") ?>igraci/update">
+
+    <label>Ime Igrača
+        <input type="text" name="firstName" value="<?php echo $podaci->firstName ?>"/>
+    </label>
+
+    
+    <label>Prezime Igrača
+        <input type="text" name="lastName" value="<?php echo $podaci->lastName ?>"/>
+    </label>
+
+    <label>Golovi
+        <input type="number" name="totalGoalsScored" value="<?php echo $podaci->totalGoalsScored ?>"/>
+    </label>
+
+    <label>Žuti kartoni
+        <input type="number" name="totallYellowCards" value="<?php echo $podaci->totallYellowCards ?>"/>
+    </label>
+
+    <label>Crveni kartoni
+        <input type="number" name="totallRedCards" value="<?php echo $podaci->totallRedCards ?>"/>
+    </label>
+
+   
+    <label> 
+        <input type="hidden" name="id" value="<?php echo $podaci->id ?>" />
+    </label>
+
+    <label> 
+        <input type="hidden" name="LeagueTable" value="<?php echo $podaci->LeagueTable ?>" />
+    </label>
+
+
+
+    <div class="grid-x">
+        <div class="large-6 columns" style="padding: 10px;">
+            <a href="<?php echo App::config("url") ?>igraci/index" class="alert button expanded">
+                Odustani
+            </a>
+            
+
+        </div>
+        <div class="large-6 columns" style="padding: 10px;">
+            <input type="submit" class="success button expanded" value="Dodaj Igrača" />
+        </div>
+    </div>
+
+</form>
+<?php endforeach; ?>
+
+
+
+ 

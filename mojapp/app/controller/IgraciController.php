@@ -44,8 +44,14 @@ class IgraciController
     {
 
         Igraci::insert();
-        $this->index();
-                
+
+        $id=Request::post("LeagueTable");
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select league from leaguetable where id=$id");
+        $izraz->execute();
+        $id = $izraz->fetchColumn();
+
+        $this->klubovi($id);                
     }
 
 
@@ -61,10 +67,33 @@ class IgraciController
     }
 
 
+    function prepareEdit($id)
+    {
 
-  
+
+            $view = new View();
+            $view->render(
+                'igraci/edit',
+                [
+                "popis"=>Igraci::igracEdit($id)
+                ]
+            );
+                
+    }
+
+    function update()
+    {
+        Igraci::update();
+        $id=Request::post("LeagueTable");
+        $this->lista($id);
+    }
 
 
+    function delete($id)
+    {
+            Igraci::delete($id);
+            $this->index();
+    }
 
 
 }

@@ -1,22 +1,22 @@
 <div class="grid-x">
 
     <?php foreach($popis as $vrsta): ?>
-    <div class="cell large-4 medium-6 small-12">
+    
+    <div class="cell large-12 medium-12 small-12 text-center">
+    
         <!-- <div class="success callout operateri"> -->
-        <h5><strong> Naziv lige: <?php echo $vrsta->nameOfLeague?>
-                <br />
-               Opis: <?php echo $vrsta->description?>
-                <br />
+        <h5><strong><?php echo $vrsta->nameOfLeague?></strong> </h5>
+ 
+             <div> <?php echo $vrsta->gameName?> 
+             </div>
 
-               Vrsta sporta: <?php echo $vrsta->gameName?>
-
-             </strong></h5>
+            
 
         <a href="<?php echo App::config("url") ?>table/index/<?php echo $vrsta->id?>" class="button">
             Tablica Lige
         </a>
 
-        <a href="<?php echo App::config("url") ?>table/prepareadd/<?php echo $vrsta->id?>" class="success button">
+        <a href="<?php echo App::config("url") ?>table/prepareadd/<?php echo $vrsta->id?>" class="button">
             Dodaj novi klub
         </a>
         <?php if($vrsta->ukupno==0): ?>
@@ -32,15 +32,15 @@
 
         <?php endif; ?>
 
-        <a href="<?php echo App::config("url") ?>liga/prepareedit/<?php echo $vrsta->id?>" class="button warning">
+        <a href="<?php echo App::config("url") ?>liga/prepareedit/<?php echo $vrsta->id?>" class="button">
             Editiraj ligu
         </a>
 
-        <a href="<?php echo App::config("url") ?>table/resetiraj/<?php echo $vrsta->id?>" class="button warning">
+        <a href="<?php echo App::config("url") ?>table/resetiraj/<?php echo $vrsta->id?>" class="button">
             Resetiraj ligu
         </a>
 
-        <a href=" <?php echo App::config("url") ?>table/rezultati/<?php echo $vrsta->id?>" class="button warning">
+        <a href=" <?php echo App::config("url") ?>table/rezultati/<?php echo $vrsta->id?>" class="button">
             Rezultati susreta
         </a>
        
@@ -49,8 +49,9 @@
 
 
         <!-- </div> -->
-    </div>
+        <hr>
 
+    </div>
     <?php endforeach; ?>
 
 </div>

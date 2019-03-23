@@ -32,7 +32,13 @@ class Igraci
         $izraz = $db->prepare("insert into Players(firstName,lastName,LeagueTable) 
         values (:firstName,:lastName,:LeagueTable)");
         $izraz->execute(self::podaciInsert());
+
      }
+
+
+
+     
+ 
 
 
 
@@ -51,29 +57,66 @@ public static function lista($id)
     {
 
         $db = Db::getInstance();
-        $izraz = $db->prepare("select id,firstName,lastName from Players where Leaguetable=$id;");
+        $izraz = $db->prepare("select * from Players where Leaguetable=$id;");
         $izraz->execute();
         return $izraz->fetchall();
+
  
 
     }
 
 
+    public static function igracEdit($id)
+    {
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select * from Players where id=$id;");
+        $izraz->execute();
+        return $izraz->fetchall();
+
+ 
+
+    }
+
+
+    public static function update()
+    {
+        $db = Db::getInstance();
+        $izraz = $db->prepare("update Players set 
+        firstName=:firstName,
+        lastName=:lastName,
+        totalGoalsScored=:totalGoalsScored,
+        totallYellowCards=:totallYellowCards,
+        totallRedCards=:totallRedCards
+        where id=:id");
+        $podaci = self::podaci();
+        $izraz->execute($podaci);
+
+    }
+
+
+    private static function podaci()
+{
+    return [
+        "firstName"=>Request::post("firstName"),
+        "lastName"=>Request::post("lastName"),
+        "totalGoalsScored"=>Request::post("totalGoalsScored"),
+        "totallYellowCards"=>Request::post("totallYellowCards"),
+        "totallRedCards"=>Request::post("totallRedCards"),
+        "id"=>Request::post("id")
+    ];
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+public static function delete($id)
+{
+    $db = Db::getInstance();
+    $izraz = $db->prepare("delete from Players where id=:id");
+    $podaci = [];
+    $podaci["id"]=$id;
+    $izraz->execute($podaci);
+}
 
 
 }

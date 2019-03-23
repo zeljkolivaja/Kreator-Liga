@@ -1,9 +1,10 @@
-
-
+<div class="grid-x">
+<div class="cell large-12 text-centered">
 <h3>Izaberite vašu ligu </h3>
+</div>
 
 <?php foreach($popis as $imelige): ?>
-<a href="<?php echo App::config("url") ?>igraci/klubovi/<?php echo $imelige->id?>" class="button">
+<a href="<?php echo App::config("url") ?>igraci/klubovi/<?php echo $imelige->id?>" class="button expanded">
 <?php echo $imelige->nameOfLeague; ?>
         </a>
 <?php echo "<br/>"; ?>

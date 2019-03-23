@@ -129,3 +129,14 @@ body > div > div:nth-child(1) > div.large-2.medium-2.columns.hide-for-small-only
     color:green !important;
 }
  
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+}
+
+.button{
+
+
+background-color: #323232;
+
+}
