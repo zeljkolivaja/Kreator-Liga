@@ -59,7 +59,7 @@
 
 
  
-    <div class="cell large-12"> <b>Raspored odigravanja utakmica:</b>
+    <div class="cell large-12"> <b>Raspored odigravanja utakmica, prvi krug:</b>
         <hr>
     </div>
     <br />
@@ -100,10 +100,54 @@
     <?php endforeach; ?>
 
 
+    <div class="cell large-12"> <b>Raspored odigravanja utakmica, drugi krug:</b>
+        <hr>
+    </div>
+    <br />
+    <?php foreach($schedule as $round => $games):?>
+    <div class="cell large-3 small-6">
+
+
+        <b> <?php echo "Kolo: ".($round+1)."<BR>"; ?> </b>
+
+        <?php foreach($games AS $play){ ?>
+        <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
+           
+           if($play["Home"]!=="slobodan"){
+               
+               echo  $play["Home"]. " preskace ovo kolo"."<BR>";
+            
+
+           }
+
+           if($play["Away"]!=="slobodan"){
+          
+            echo  $play["Away"]. " preskace ovo kolo"."<BR>";
+                  }
+
+           
+           continue;        
+           } ?>
+        <?php
+         
+      echo $play["Away"]. " - " . $play["Home"] . "<BR>"; 
+    
+
+    }?>
+        <br>
+    </div>
+
+
+    <?php endforeach; ?>
+
+
+
 
 </div>
 
 <?php include_once "updateresult.phtml" ?>
+<?php include_once "updateresult2.phtml" ?>
+
 
 
 </div>
@@ -111,4 +155,4 @@
 </div>
 
 
-<?php var_dump($schedule) ?>
+ 

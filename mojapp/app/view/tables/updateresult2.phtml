@@ -1,18 +1,18 @@
-<b>Unos rezultata prvog kruga: </b>
+<hr>
+
+<b>Unos rezultata drugog kruga: </b>
 <hr>
 <?php 
- $a=0; 
- $b=0; 
- $c=0; 
- $d=0; ?>
+ $a1=0; 
+ $b1=0; 
+ $c1=0; 
+ $d1=0; ?>
 <?php foreach($schedule as $round => $games): ?>
 <br />
 
 
-<b> <?php echo "Kolo: ".($round+1)."<br/>"?> </b>
+<b> <?php echo "Kolo: ".($round+6)."<br/>"?> </b>
 
-
-<?php $e=0; ?>
 
 
 <?php foreach($games AS $play): ?>
@@ -20,13 +20,13 @@
     continue;
 }  ?>
 
-<button title="kliknite za unos" onclick="myFunction<?php echo $a+=1;?>()"><?php echo $play["Home"] . " vs " . $play["Away"] ; ?></button>
+<button title="kliknite za unos" onclick="myyFunction<?php echo $a1+=1;?>()"><?php echo $play["Away"] . " vs " . $play["Home"] ; ?></button>
 <br />
-<div id="myDIV<?php echo $b+=1;?>" style="display:none;">
+<div id="myyDIV<?php echo $b1+=1;?>" style="display:none;">
 
     <script>
-    function myFunction<?php echo $c+=1; ?>() {
-        var x = document.getElementById("myDIV<?php echo $d+=1; ?>");
+    function myyFunction<?php echo $c1+=1; ?>() {
+        var x = document.getElementById("myyDIV<?php echo $d1+=1; ?>");
         if (x.style.display === "none") {
             x.style.display = "block";
         } else {
@@ -38,13 +38,7 @@
 
     <form class="log-in-form" method="post" action="<?php echo App::config("url") ?>table/insert/">
 
-        <label> Ime Kluba
-            <input type="text" name="homeTeam" value="<?php echo $play["Home"] ?>" readonly />
-        </label>
-
-        <label><b> Postignuti Golovi kluba <?php echo $play["Home"] ?> </b>
-            <input type="number" name="homeTeamGoals" />
-        </label>
+    
 
 
         <label> Ime Kluba
@@ -56,13 +50,21 @@
             <input type="number" name="awayTeamGoals" />
         </label>
 
+        <label> Ime Kluba
+            <input type="text" name="homeTeam" value="<?php echo $play["Home"] ?>" readonly />
+        </label>
+
+        <label><b> Postignuti Golovi kluba <?php echo $play["Home"] ?> </b>
+            <input type="number" name="homeTeamGoals" />
+        </label>
+
 
         <label>
             <input type="hidden" name="totalPointsWin" value="<?php echo $bodovi ?>" readonly />
         </label>
 
         <label>
-            <input type="text" name="description" value="1" readonly />
+            <input type="text" name="description" value="2" readonly />
         </label>
 
 

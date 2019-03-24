@@ -232,9 +232,11 @@ public static function insert()
     $izraz->execute(self::podacigameAwayTeam());
     $awayTeam = $izraz->fetchColumn();
 
+    $description=Request::post("description");
 
-    $izraz = $db->prepare("insert into game(homeTeamGoals,awayTeamGoals,league,homeTeam,AwayTeam)
-    values (:homeTeamGoals,:awayTeamGoals,:league,$homeTeam,$awayTeam);");
+
+    $izraz = $db->prepare("insert into game(homeTeamGoals,awayTeamGoals,league,homeTeam,AwayTeam,description)
+    values (:homeTeamGoals,:awayTeamGoals,:league,$homeTeam,$awayTeam,$description);");
     $izraz->execute(self::podacigame());
 
     $homeGoals = Request::post("homeTeamGoals");
@@ -326,7 +328,10 @@ public static function insert()
             FROM game 
             inner join leagueTable as a on a.id = game.homeTeam 
             inner join leagueTable as b on b.id = game.awayTeam
-            where game.league=$id; 
+            where game.league=$id
+            order by
+            description
+; 
         ");
         $izraz->execute();
         return $izraz->fetchAll();

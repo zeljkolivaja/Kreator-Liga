@@ -4,22 +4,43 @@
 <div class="grid-x">
     <?php foreach($tablica as $vrsta): ?>
     <div class="cell large-4">
-        <div class="success callout operateri">
-            <h4>Momcadi (id)</h4>
+        <div>
+            
+            <?php if($vrsta->description==="1"){ ?>
+            <h4>Kolo <?php echo $vrsta->description ?>.</h4>
+
+            <h4>Momcadi</h4>
             <h5><strong><?php echo $vrsta->hometeam?> vs <?php echo $vrsta->awayteam?>
             <br/>
             <h4>Rezultat susreta</h4>
 
                 <strong><?php echo $vrsta->homeTeamGoals?> : <?php echo $vrsta->awayTeamGoals?>
+                  </strong>
+                   
+                </strong></h5>
+            <?php }else{ ?>
+                <h4>Kolo <?php echo $vrsta->description ?>.</h4>
+             <h4>Momcadi</h4>
+            <h5><strong><?php echo $vrsta->awayteam?> vs <?php echo $vrsta->hometeam?>
+            <br/>
+            <h4>Rezultat susreta</h4>
+
+
+                <strong><?php echo $vrsta->awayTeamGoals?> : <?php echo $vrsta->homeTeamGoals?>
+ 
                  </strong>
                    
                 </strong></h5>
- 
+                <hr>
+
+
+            <?php } ?> 
 
         </div>
     </div>
-
     <?php endforeach; ?>
 
 
 </div>
+
+ 

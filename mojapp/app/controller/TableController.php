@@ -163,11 +163,14 @@ class TableController
         $izraz = $db->prepare("select id from leagueTable where nameOfTeam=:awayTeam;");
         $izraz->execute(self::podacigameAwayTeam());
         $awayTeam = $izraz->fetchColumn();
+ 
+
+        $krug = Request::post("description");
         
      
     
         $db = Db::getInstance();
-        $izraz = $db->prepare("select id from game where homeTeam=$homeTeam and awayTeam=$awayTeam;");
+        $izraz = $db->prepare("select id from game where homeTeam=$homeTeam and awayTeam=$awayTeam and description=$krug;");
         $izraz->execute();
         $ukupno = $izraz->fetchColumn();
         if($ukupno>0){
