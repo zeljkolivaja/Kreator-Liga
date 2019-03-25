@@ -1,6 +1,6 @@
 <hr>
 
-<b>Unos rezultata drugog kruga: </b>
+<b>Unos rezultata drugog kruga: (opcionalno) </b>
 <hr>
 <?php 
  $a1=0; 
@@ -11,7 +11,7 @@
 <br />
 
 
-<b> <?php echo "Kolo: ".($round+6)."<br/>"?> </b>
+<b> <?php echo "Kolo: ".($round+$f)."<br/>"?> </b>
 
 
 
@@ -64,7 +64,7 @@
         </label>
 
         <label>
-            <input type="text" name="description" value="2" readonly />
+            <input type="hidden" name="description" value="2" readonly />
         </label>
 
 

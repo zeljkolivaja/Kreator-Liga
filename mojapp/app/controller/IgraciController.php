@@ -47,7 +47,7 @@ class IgraciController
 
         $id=Request::post("LeagueTable");
         $db = Db::getInstance();
-        $izraz = $db->prepare("select league from leaguetable where id=$id");
+        $izraz = $db->prepare("select league from leagueTable where id=$id");
         $izraz->execute();
         $id = $izraz->fetchColumn();
 
