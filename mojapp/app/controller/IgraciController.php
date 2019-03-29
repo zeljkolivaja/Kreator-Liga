@@ -66,6 +66,18 @@ class IgraciController
         );
     }
 
+    function top($id)
+    {
+        $view = new View();
+        $view->render(
+            'igraci/topScorers',
+            [
+            "top"=>Igraci::topScorers($id)
+            ]
+        );
+    }
+
+
 
     function prepareEdit($id)
     {

@@ -12,6 +12,11 @@ class TableController
     }
     }
 
+
+    function shuffle($id){
+
+        
+    }
  
     function index($id)
     {

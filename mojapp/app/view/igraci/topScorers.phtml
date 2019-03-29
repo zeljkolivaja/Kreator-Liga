@@ -1,0 +1,23 @@
+ 
+
+<table class="hover">
+
+<thead>
+    <tr>
+        <th width="50">Klub</th>
+        <th width="500">Ime Igrača</th>
+        <th width="50">Broj golova</th>
+     </tr>
+</thead>
+<tbody>
+    <?php foreach($top as $podaci): ?>
+    <tr>
+        <td><?php echo $podaci->nameOfTeam?></td>
+        <td><?php echo $podaci->firstName . " " . $podaci->lastName?></td>
+         <td><?php echo $podaci->totalGoalsScored?></td>
+   </tr>
+
+    <?php endforeach; ?>
+
+</tbody>
+</table>

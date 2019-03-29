@@ -66,6 +66,31 @@ public static function lista($id)
     }
 
 
+
+    public static function topScorers($id)
+    {
+
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select
+        play.firstName,
+        play.lastName,
+        play.totalGoalsScored,
+        lt.league,
+        lt.nameOfTeam
+        from Players play inner join
+        leagueTable lt on 
+        lt.id=play.LeagueTable
+        where league=$id
+        order by play.totalGoalsScored DESC;");
+        $izraz->execute();
+        return $izraz->fetchall();
+
+
+    }
+
+
+
+
     public static function igracEdit($id)
     {
 
