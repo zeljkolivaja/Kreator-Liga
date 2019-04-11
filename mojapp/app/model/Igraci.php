@@ -37,10 +37,8 @@ class Igraci
 
 
 
-     
- 
 
-
+       
 
      private static function podaciInsert()
 {
@@ -55,13 +53,12 @@ class Igraci
 
 public static function lista($id)
     {
-
+ 
         $db = Db::getInstance();
         $izraz = $db->prepare("select * from Players where Leaguetable=$id;");
         $izraz->execute();
         return $izraz->fetchall();
 
- 
 
     }
 

@@ -39,20 +39,45 @@ class IgraciController
                 
     }
 
+    function listaIgrac()
+    {
+
+        $id=Request::post("klub");
+        
+        $view = new View();
+        $view->render(
+            'igraci/lista',
+            [
+            "popis"=>Igraci::lista(Igraci::listaIgraca($id))
+            ]
+        );
+                
+    }
+
+
 
     function insert()
     {
-
         Igraci::insert();
-
         $id=Request::post("LeagueTable");
-        $db = Db::getInstance();
-        $izraz = $db->prepare("select league from leagueTable where id=$id");
-        $izraz->execute();
-        $id = $izraz->fetchColumn();
-
-        $this->klubovi($id);                
+        $this->lista($id);                
     }
+
+
+
+
+    function lista2()
+    {
+        $klub = Request::post("klub");
+        
+        $db = Db::getInstance();
+        $izraz = $db->prepare("select id from leagueTable where nameOfTeam='$klub';");
+        $izraz->execute();
+        $ime = $izraz->fetchColumn();
+        $this->lista($ime);
+   
+    }
+
 
 
     function lista($id)
@@ -61,22 +86,60 @@ class IgraciController
         $view->render(
             'igraci/lista',
             [
-            "popis"=>Igraci::lista($id)
+            "popis"=>Igraci::lista($id),
+            "id"=>$id
             ]
         );
     }
+
+    // function top($id)
+    // {
+    //     $view = new View();
+    //     $view->render(
+    //         'igraci/topScorers',
+    //         [
+    //         "top"=>Igraci::topScorers($id)
+    //         ]
+    //     );
+    // }
+
 
     function top($id)
     {
-        $view = new View();
-        $view->render(
-            'igraci/topScorers',
-            [
-            "top"=>Igraci::topScorers($id)
-            ]
-        );
-    }
 
+        $db = Db::getInstance();
+        $izraz = $db->prepare("
+            select
+            play.firstName,
+            play.lastName,
+            play.totalGoalsScored,
+            lt.league,
+            lt.nameOfTeam
+            from Players play inner join
+            leagueTable lt on 
+            lt.id=play.LeagueTable
+            where league=$id
+            order by play.totalGoalsScored DESC;
+            ");
+        
+        $izraz->execute();
+        $rezultati = $izraz->fetchAll(PDO::FETCH_OBJ);
+        $podaci=[];
+        foreach($rezultati as $red){
+            if($red->totalGoalsScored=="0"){
+                continue;
+            }
+            $p=new stdClass();
+            $p->name=$red->firstName . " " . $red->lastName . "(" . $red->nameOfTeam . ")" ;
+            $p->y=(int)$red->totalGoalsScored;
+            $podaci[]=$p;
+        }
+        
+
+        $view = new View();
+        $view->render('igraci/topScorers',["podaci"=>json_encode($podaci,JSON_NUMERIC_CHECK)]);
+
+    }
 
 
     function prepareEdit($id)

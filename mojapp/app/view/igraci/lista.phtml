@@ -1,10 +1,11 @@
+    <a href="<?php echo App::config("url") ?>igraci/prepareinsert/<?php echo $id?>" class="button expanded">
+Unesite igrača        </a>
 <table class="hover">
 
 <thead>
     <tr>
         <th width="100">Ime igrača</th>
-        <th width="100">Prezime igrača</th>
-        <th width="100">Editiraj igrača</th>
+        <th width="100">Unos statistike</th>
         <th width="100">Golovi</th>
         <th width="100">Crveni kartoni</th>
         <th width="100">Žuti kartoni</th>
@@ -14,8 +15,7 @@
 <tbody>
     <?php foreach($popis as $podaci): ?>
     <tr>
-        <td><?php echo $podaci->firstName?></td>
-        <td><?php echo $podaci->lastName?></td>   
+        <td><?php echo $podaci->firstName . " " . $podaci->lastName ?></td> 
         <td style="text-align:left">
 
 <a href="<?php echo App::config("url") ?>igraci/prepareEdit/<?php echo $podaci->id ?>">

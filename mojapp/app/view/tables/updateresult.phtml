@@ -44,7 +44,7 @@
         </label>
 
         <label><b> Postignuti Golovi kluba <?php echo $play["Home"] ?> </b>
-            <input type="number" name="homeTeamGoals" />
+            <input type="number" name="homeTeamGoals" value="0" />
         </label>
 
 
@@ -54,7 +54,7 @@
 
 
         <label> <b> Postignuti Golovi kluba <?php echo $play["Away"] ?> </b>
-            <input type="number" name="awayTeamGoals" />
+            <input type="number" name="awayTeamGoals" value="0" />
         </label>
 
 
@@ -89,6 +89,8 @@
                 </a>
 
 
+
+
             </div>
             <div style="padding: 10px;">
                 <input type="submit" class="success button" value="Dodaj utakmicu" />
@@ -99,6 +101,25 @@
         <br />
 
     </form>
+    
+    <div class="grid-x">
+
+    <div class="cell  text-center" >
+    Unos statistke:
+    <form class="log-in-form"  name="myLetters" action="<?php echo App::config("url") ?>igraci/lista2/" method="POST">
+ <input type="submit" class="button expanded" name="klub" value="<?php echo $play["Home"] ?>" />
+ </form>
+ Unos statistke:
+
+  <form class="log-in-form"  name="myLetters" action="<?php echo App::config("url") ?>igraci/lista2/" method="POST">
+ <input type="submit" class="button expanded" name="klub" value="<?php echo $play["Away"] ?>" />
+ </form>
+ 
+ </div>
+
+ </div>
+
+
 </div>
 
 <?php  endforeach; ?>

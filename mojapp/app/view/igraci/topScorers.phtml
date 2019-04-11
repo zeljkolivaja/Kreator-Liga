@@ -1,23 +1,16 @@
- 
 
-<table class="hover">
 
-<thead>
-    <tr>
-        <th width="50">Klub</th>
-        <th width="500">Ime Igrača</th>
-        <th width="50">Broj golova</th>
-     </tr>
-</thead>
-<tbody>
-    <?php foreach($top as $podaci): ?>
-    <tr>
-        <td><?php echo $podaci->nameOfTeam?></td>
-        <td><?php echo $podaci->firstName . " " . $podaci->lastName?></td>
-         <td><?php echo $podaci->totalGoalsScored?></td>
-   </tr>
 
-    <?php endforeach; ?>
+<?php 
+  
+ $js="
+ <script src=\"https://code.highcharts.com/highcharts.js\"></script>
+<script src=\"https://code.highcharts.com/modules/exporting.js\"></script>
+<script src=\"https://code.highcharts.com/modules/export-data.js\"></script>
+<script>var podaci = " . $podaci . ";</script>
+<script src=\"" . APP::config("url") . "public/js/topScorers.js\"></script>
+ ";
+?>
 
-</tbody>
-</table>
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>

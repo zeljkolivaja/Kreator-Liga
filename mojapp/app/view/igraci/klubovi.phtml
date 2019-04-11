@@ -2,28 +2,19 @@
 
      <thead>
          <tr>
-             <th width="50">Klub</th>
-             <th width="50">Unesi igrače</th>
-             <th width="500">Popis igrača</th>
+              <th width="500">Izaberite klub</th>
          </tr>
      </thead>
      <tbody>
          <?php foreach($popis as $podaci): ?>
          <tr>
-             <td><?php echo $podaci->nameOfTeam?></td>
+ 
              <td style="text-align:left">
 
-                 <a href="<?php echo App::config("url") ?>igraci/prepareinsert/<?php echo $podaci->id ?>">
-                     <i class="fas fa-edit fa-2x"></i>
-                 </a>
 
-             </td>
-
-             <td style="text-align:left">
-
-                 <a href="<?php echo App::config("url") ?>igraci/lista/<?php echo $podaci->id ?>">
-                     <i class="fas fa-edit fa-2x"></i>
-                 </a>
+                 <a href="<?php echo App::config("url") ?>igraci/lista/<?php echo $podaci->id?>" class="button expanded">
+                 Klub <?php echo $podaci->nameOfTeam?>
+         </a>
 
              </td>
 
