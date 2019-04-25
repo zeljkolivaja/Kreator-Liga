@@ -13,12 +13,7 @@
                         <a href="<?php echo App::config("url")."index" ?>"><i class="fas fa-home"></i> Početna</a>
 
                     </li>
-                    <li>
-                        <a href="<?php echo App::config("url")."onama" ?>"><i class="fas fa-info-circle"></i> O nama</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo App::config("url")."kontakt" ?>"><i class="fas fa-envelope-square"></i> Kontakt</a>
-                    </li>
+ 
                     <?php if(Session::getInstance()->isLogiran()): ?>
                     <li>
                         <a href="<?php echo App::config("url")."korisnik/index" ?>"><i class="fas fa-user"></i> Korisnik</a>
@@ -27,10 +22,14 @@
                         <a href="<?php echo App::config("url")."vrsta/index" ?>"><i class="fas fa-volleyball-ball"></i> Vrsta igre</a>
                     </li>
                     <li>
-                        <a href="<?php echo App::config("url")."liga/index" ?>"><i class="fas fa-user"></i> Natjecanja</a>
+                        <a href="<?php echo App::config("url")."liga/index" ?>"><i class="fas fa-user"></i> Natjecanja - jednokruzno</a>
                     </li>
 
                     <li>
+                        <a href="<?php echo App::config("url")."liga/index2" ?>"><i class="fas fa-user"></i> Natjecanja - dvokruzno</a>
+                    </li>
+
+                     <li>
                         <a href="<?php echo App::config("url")."igraci/index" ?>"><i class="fas fa-user"></i> Igraci</a>
                     </li>
 

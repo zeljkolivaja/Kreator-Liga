@@ -102,35 +102,15 @@
 
 
     <?php endforeach; ?>
-    <br>
     <?php $f=$round+2; ?>
 
-    <div class="cell large-12">
-    <button title="kliknite za unos" onclick="myFunctionx()"><b>Raspored odigravanja utakmica, drugi krug: (opcionalno)</b></button>
-    </div>
-    <br/>
 
-    <script>
-    function myFunctionx() {
-        var x = document.getElementById("myDIVx");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
-    </script>
-
-
-    <div class="cell large-12" id="myDIVx" style="display:none;">
-
+    <!-- <div class="cell large-12"> <b>Raspored odigravanja utakmica, drugi krug: (opcionalno)</b>
         <hr>
-    
+    </div> -->
     <br />
-     
     <?php foreach($schedule as $round => $games):?>
-
-     <div class="cell large-3 small-6">
+    <div class="cell large-3 small-6">
 
         <b> <?php echo "Kolo: ".($round+$f)."<BR>"; ?> </b>
 
@@ -165,7 +145,7 @@
     <?php endforeach; ?>
 
 
-    </div>
+
 
 </div>
 

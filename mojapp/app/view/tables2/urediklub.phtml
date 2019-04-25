@@ -1,39 +1,30 @@
-<link href="https://unpkg.com/tabulator-tables@4.2.4/dist/css/tabulator.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.2.4/dist/js/tabulator.min.js"></script>
-
-
 <div class="grid-x">
-<div class="cell"> 
-
-    <a href="<?php echo App::config("url") ?>liga/index" class="success button expanded">
+    <a href="<?php echo App::config("url") ?>liga/index2" class="success button expanded">
     <i class="fas fa-arrow-left"></i>
 
 Povratak
     </a>
-    </div>
 
 
-    <div class="cell large-12"> <p class="text-center"> <b>#LJESTVICA</b> </p>
-     </div>
 
-
-     <table class="hover" id="example-table">
+    <table class="hover">
         <caption>
             <h4>Ljestvica</h4>
         </caption>
 
         <thead>
             <tr>
-                <th width="10">#</th>
-                <th width="150">Klub</th>
-                <th width="80">Uk</th>
-                <th width="80">Bod</th>
-                <th width="80" class="hide-for-small-only">Pob</th>
-                <th width="80" class="hide-for-small-only">Por</th>
-                <th width="80" class="hide-for-small-only">Ner</th>
-                <th width="80" class="hide-for-small-only">G+</th>
-                <th width="80" class="hide-for-small-only">G-</th>
- 
+                <th width="10">Pozicija</th>
+                <th width="300">Klub</th>
+                <th width="100">Utakmice</th>
+                <th width="100">Osvojeni Bodovi</th>
+                <th width="100" class="hide-for-small-only">Pobjede</th>
+                <th width="100" class="hide-for-small-only">Porazi</th>
+                <th width="100" class="hide-for-small-only">Nerješene</th>
+                <th width="100" class="hide-for-small-only">Zabijeni golovi</th>
+                <th width="100" class="hide-for-small-only">Primljeni golovi</th>
+                <th width="100">Obriši klub</th>
+
             </tr>
         </thead>
         <tbody>
@@ -50,7 +41,16 @@ Povratak
                 <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalDraws?></td>
                 <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalGoalsScored?></td>
                 <td style="text-align:left" class="hide-for-small-only"><?php echo $podaci->totalGoalsConceded?></td>
- 
+                <td style="text-align:left"><a style="color: red;"
+                        href="<?php echo App::config("url") ?>table/delete2/<?php echo $podaci->id ?>">
+                        <i class="fas fa-trash fa-2x"></i>
+                        <a href="<?php echo App::config("url") ?>table/prepareedit2/<?php echo $podaci->id ?>">
+                            <i class="fas fa-edit fa-2x"></i>
+                        </a>
+
+                    </a>
+                </td>
+
             </tr>
             <?php $bodovi = $podaci->pointsPerWin ?>
             <?php $bodovix = $podaci->pointsPerDraw ?>
@@ -64,21 +64,8 @@ Povratak
     </table>
 
 
-    <script>var table = new Tabulator("#example-table", {
-            responsiveLayout:"hide",
-            columns:[
-    {title:"#", responsive:0}, //never hide this column
-    {title:"Klub", responsive:0 },
-    {title:"Uk", responsive:0 },
-    {title:"Bod", responsive:0 },
-     ],
-
-
-    });
-    
-</script>
-
-    <div class="cell large-12"> <p class="text-center" id="raspored"> <b>Raspored odigravanja utakmica, prvi krug:</b> </p>
+ 
+    <div class="cell large-12"> <b>Raspored odigravanja utakmica, prvi krug:</b>
         <hr>
     </div>
     <br />
@@ -117,19 +104,61 @@ Povratak
 
 
     <?php endforeach; ?>
- 
+    <?php $f=$round+2; ?>
+
+
+    <!-- <div class="cell large-12"> <b>Raspored odigravanja utakmica, drugi krug: (opcionalno)</b>
+        <hr>
+    </div> -->
+    <br />
+    <?php foreach($schedule as $round => $games):?>
+    <div class="cell large-3 small-6">
+
+        <b> <?php echo "Kolo: ".($round+$f)."<BR>"; ?> </b>
+
+        <?php foreach($games AS $play){ ?>
+        <?php  if($play["Home"]=="slobodan" or $play["Away"]=="slobodan"){
+           
+           if($play["Home"]!=="slobodan"){
+               
+               echo  $play["Home"]. " preskace ovo kolo"."<BR>";
+            
+
+           }
+
+           if($play["Away"]!=="slobodan"){
+          
+            echo  $play["Away"]. " preskace ovo kolo"."<BR>";
+                  }
+
+           
+           continue;        
+           } ?>
+        <?php
+         
+      echo $play["Away"]. " - " . $play["Home"] . "<BR>"; 
+    
+
+    }?>
+        <br>
+    </div>
+
+
+    <?php endforeach; ?>
+
+
+
 
 </div>
 
 <?php include_once "updateresult.phtml" ?>
+<?php include_once "updateresult2.phtml" ?>
 
 
 
 </div>
 
 </div>
-
- 
 
 
  

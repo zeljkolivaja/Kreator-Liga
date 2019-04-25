@@ -67,8 +67,18 @@ class Table{
         $izraz = $db->prepare("insert into leagueTable(nameOfTeam,league) 
         values (:nameOfTeam,:league)");
         $izraz->execute(self::podaci());
-    }
 
+
+    }
+    
+    public static function add2()
+    {
+        $db = Db::getInstance();
+        $izraz = $db->prepare("insert into leagueTable(nameOfTeam,league) 
+        values (:nameOfTeam,:league)");
+        $zadnjaOsobaSifra = $db->lastInsertId();
+        $izraz->execute(self::podaci());
+    }
 
     public static function resetiraj($id)
     {

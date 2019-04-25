@@ -1,14 +1,9 @@
 <form class="log-in-form" method="post"
-    action="<?php echo App::config("url") ?>table/add">
+    action="<?php echo App::config("url") ?>table/add2">
 
     <label>Ime Kluba
         <input type="text" name="nameOfTeam"/>
     </label>
-
-    <label>Slika
-    <input type="file" name="slika"  />
-  </label>
-
     <label> 
         <input type="hidden" name="league" value="<?php echo $poruka ?>" />
     </label>
@@ -16,10 +11,13 @@
 
     <div class="grid-x">
         <div class="large-6 columns" style="padding: 10px;">
-            <a href="<?php echo App::config("url") ?>liga/index" class="alert button expanded">
+            <a href="<?php echo App::config("url") ?>liga/index2" class="alert button expanded">
                 Odustani
             </a>
             
+
+           
+
 
         </div>
         <div class="large-6 columns" style="padding: 10px;">

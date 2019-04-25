@@ -1,7 +1,7 @@
 <div class="grid-x">
 
     <?php foreach($popis as $vrsta): ?>
-    <?php if ($vrsta->description == 1) {
+    <?php if ($vrsta->description == 2) {
         ?>
     
     
@@ -15,16 +15,16 @@
 
             
 
-        <a href="<?php echo App::config("url") ?>table/index/<?php echo $vrsta->id?>" class="button">
+        <a href="<?php echo App::config("url") ?>table/index2/<?php echo $vrsta->id?>" class="button">
             Tablica Lige
         </a>
 
-        <a href="<?php echo App::config("url") ?>table/prepareadd/<?php echo $vrsta->id?>" class="button">
+        <a href="<?php echo App::config("url") ?>table/prepareadd2/<?php echo $vrsta->id?>" class="button">
             Dodaj novi klub
         </a>
         <?php if($vrsta->ukupno==0): ?>
 
-        <a href="<?php echo App::config("url") ?>liga/delete/<?php echo $vrsta->id?>" class="alert button">
+        <a href="<?php echo App::config("url") ?>liga/delete2/<?php echo $vrsta->id?>" class="alert button">
             Obriši ligu
         </a>
 
@@ -35,15 +35,15 @@
 
         <?php endif; ?>
 
-        <a href="<?php echo App::config("url") ?>liga/prepareedit/<?php echo $vrsta->id?>" class="button">
+        <a href="<?php echo App::config("url") ?>liga/prepareedit2/<?php echo $vrsta->id?>" class="button">
             Editiraj ligu
         </a>
 
-        <a href="<?php echo App::config("url") ?>table/resetiraj/<?php echo $vrsta->id?>" class="button">
+        <a href="<?php echo App::config("url") ?>table/resetiraj2/<?php echo $vrsta->id?>" class="button">
             Resetiraj ligu
         </a>
 
-        <a href=" <?php echo App::config("url") ?>table/rezultati/<?php echo $vrsta->id?>" class="button">
+        <a href=" <?php echo App::config("url") ?>table/rezultati2/<?php echo $vrsta->id?>" class="button">
             Rezultati susreta
         </a>
 
@@ -66,7 +66,7 @@
 <div class="grid-container">
     <div class="grid-x align-center">
 
-        <a href="<?php echo App::config("url") ?>liga/prepareadd/<?php echo Session::getInstance()->getUser()->firstName?>"
+        <a href="<?php echo App::config("url") ?>liga/prepareadd2/<?php echo Session::getInstance()->getUser()->firstName?>"
         class="success button">
             Dodaj novu ligu
         </a>

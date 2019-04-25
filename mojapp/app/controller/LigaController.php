@@ -24,12 +24,30 @@ class LigaController
         );
     }
 
+    function index2()
+    {
+        $view = new View();
+        $view->render(
+            'lige2/index',
+            [
+            "popis"=>Popis::read()
+            ]
+        );
+    }
+
 
     function delete($id)
     {
         Popis::delete($id);
         $this->index();      
     }
+
+    function delete2($id)
+    {
+        Popis::delete($id);
+        $this->index2();      
+    }
+
 
 
     function prepareadd()
@@ -42,6 +60,19 @@ class LigaController
           ]
      );
     }
+
+
+    function prepareadd2()
+    {
+    $view = new View();
+    $view->render(
+        'lige2/novaliga',
+        [
+         "vrstasporta"=>Popis::readgametype()
+          ]
+     );
+    }
+
  
 
     function add()
@@ -50,6 +81,22 @@ class LigaController
     if($kontrola===true){
         Popis::add();
         $this->index();
+    }else{    $view = new View();
+        $view->render(
+            'lige/poruka',
+            [
+            "poruka"=>$kontrola
+            ]
+            );
+        }
+    }
+
+    function add2()
+    {
+    $kontrola = $this->kontrola();
+    if($kontrola===true){
+        Popis::add();
+        $this->index2();
     }else{    $view = new View();
         $view->render(
             'lige/poruka',
@@ -73,10 +120,53 @@ class LigaController
     $view->render(
         'lige/edit',
          [
-        "poruka"=>""
+            "tablica"=>Table::read($id)
+
           ]
      );
     }
+
+
+
+    function prepareedit2($id)
+    {
+    $view = new View();
+    $korisnik = Popis::find($id);
+    $_POST["nameOfLeague"]=$korisnik->nameOfLeague;
+    $_POST["users"]=$korisnik->users;
+    $_POST["description"]=$korisnik->description;
+    $_POST["gameType"]=$korisnik->gameType;
+    $_POST["id"]=$korisnik->id;
+
+    $view->render(
+        'lige2/edit',
+         [
+            "tablica"=>Table::read($id)
+
+          ]
+     );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function edit($id)
@@ -96,6 +186,34 @@ class LigaController
      );
     }
     }
+
+
+
+
+    function edit2($id)
+    {
+    $_POST["id"]=$id;
+    $kontrola = $this->kontrolaedit();
+    if($kontrola===true){
+    Popis::update($id);
+    $this->index2();
+    }else{
+    $view = new View();
+    $view->render(
+        'lige/poruka',
+        [
+        "poruka"=>$kontrola
+        ]
+     );
+    }
+    }
+
+
+
+
+
+
+
 
 
     function kontrola()

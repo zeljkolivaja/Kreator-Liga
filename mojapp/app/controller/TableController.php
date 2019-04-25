@@ -13,11 +13,7 @@ class TableController
     }
 
 
-    function shuffle($id){
 
-        
-    }
- 
     function index($id)
     {
         $array = json_decode(json_encode(Table::readUpdate($id)), true); 
@@ -54,10 +50,45 @@ class TableController
         ]
     );
     }
-    
-    
 
 
+
+    function index2($id)
+    {
+        $array = json_decode(json_encode(Table::readUpdate($id)), true); 
+        $members = array_column($array , 'nameOfTeam');
+        // print_r($members);
+        
+         
+        function scheduler($members){
+            if (count($members)%2 != 0){
+                array_push($members,"slobodan");
+            }
+            $away = array_splice($members,(count($members)/2));
+            $home = $members;
+            for ($i=0; $i < count($home)+count($away)-1; $i++){
+                for ($j=0; $j<count($home); $j++){
+                    $round[$i][$j]["Home"]=$home[$j];
+                    $round[$i][$j]["Away"]=$away[$j];
+                }
+                if(count($home)+count($away)-1 > 2){
+                    // array_unshift($away,array_shift(array_splice($home,1,1)));
+                    array_unshift($away, current(array_splice($home,1,1)) ); 
+                    array_push($home,array_pop($away));
+                }
+            }
+            return $round;
+        }
+        $schedule = scheduler($members);
+    
+
+        $view = new View();
+        $view->render('tables2/index',
+        ["tablica"=>Table::read($id),
+        "schedule"=>$schedule
+        ]
+    );
+    }    
 
     function delete($id)
     {
@@ -66,12 +97,29 @@ class TableController
     }
 
 
+
+    function delete2($id)
+    {
+            Table::delete($id);
+            $this->home2();
+    }
+
+
+
     function resetiraj($id)
     {
         Table::resetiraj($id);
         $this->home();
 
     }
+
+    function resetiraj2($id)
+    {
+        Table::resetiraj($id);
+        $this->home2();
+
+    }
+
 
 
     function prepareadd($id)
@@ -86,12 +134,32 @@ class TableController
     }
 
 
+    function prepareadd2($id)
+    {
+        $view = new View();
+        $view->render(
+            'tables2/noviklub',
+            [
+            "poruka"=>$id
+            ]
+        );
+    }
+
+
     function add()
     {
+
             $kontrola = $this->kontrolaadd();
             if($kontrola===true){
             Table::add();
-            $this->home();
+            $id = Request::post("league");
+            $ime =Request::post("nameOfTeam");
+            $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+            move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+
+            $this->prepareadd($id);
+
+
         }else{
             $view = new View();
             $view->render(
@@ -104,12 +172,43 @@ class TableController
     }
 }
 
+
+function add2()
+{
+
+        $kontrola = $this->kontrolaadd();
+        if($kontrola===true){
+        Table::add();
+        $id = Request::post("league");
+        $this->prepareadd2($id);
+    }else{
+        $view = new View();
+        $view->render(
+            'tables/poruka',
+            [
+            "poruka"=>$kontrola
+            ]
+        );
+
+}
+}
     
     function home()
     {
         $view = new View();
         $view->render(
             'lige/index',
+            [
+            "popis"=>Popis::read()
+            ]
+        );
+    }
+
+    function home2()
+    {
+        $view = new View();
+        $view->render(
+            'lige2/index',
             [
             "popis"=>Popis::read()
             ]
@@ -136,6 +235,26 @@ class TableController
             ]
         );
     }
+
+    function prepareedit2($id)
+    {
+        $view = new View();
+        $korisnik = Table::find($id);
+        $_POST["id"]=$korisnik->id;
+        $_POST["nameOfTeam"]=$korisnik->nameOfTeam;
+        $_POST["totalPoints"]=$korisnik->totalPoints;
+        $_POST["totalGoalsScored"]=$korisnik->totalGoalsScored;
+        $_POST["totalGoalsConceded"]=$korisnik->totalGoalsConceded;
+        $_POST["league"]=$korisnik->league;
+    
+    
+        $view->render(
+            'tables2/edit',
+            [
+            "poruka"=>""
+            ]
+        );
+    }
     
 
     function edit($id)
@@ -155,6 +274,26 @@ class TableController
             );
         }               
     }
+
+    function edit2($id)
+    {
+        $_POST["id"]=$id;
+        $kontrola = $this -> kontrolaedit();
+        if ($kontrola===true) {
+            Table::update($id);
+            $this->home();
+        }else{
+            $view = new View();
+            $view->render(
+                'tables/poruka',
+                [
+                "poruka"=>$kontrola
+                ]
+            );
+        }               
+    }
+
+
 
         
     function kontrolainsert2(){
@@ -308,6 +447,16 @@ class TableController
     }
 
 
+    function rezultati2($id)
+    {
+        $view = new View();
+        $view->render('tables2/rezultati',
+        ["tablica"=>Table::rezultati($id)
+        ]
+    );
+    }
+
+
     private static function podacigameHomeTeam()
     {
         return [
@@ -348,8 +497,21 @@ class TableController
     {
             Table::deleteutakmice($id);
             $this->home();
+    
+    }
 
+    function deleteutakmice2($id)
+    {
+            Table::deleteutakmice($id);
+            $this->home2();
            
     }
+
+
+
+
+
+
+
     
 }

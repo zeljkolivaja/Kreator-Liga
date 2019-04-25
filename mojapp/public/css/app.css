@@ -145,3 +145,11 @@ background-color: #323232;
     margin-bottom: 4rem;
 }
  
+#raspored{
+    margin-top: 5%;
+}
+
+#example-table{
+    margin-left: auto;
+    margin-right: auto;
+}
