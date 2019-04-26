@@ -10,13 +10,42 @@
 
 Povratak
     </a>
+
+    <?php foreach($tablica as $podaci){
+                 
+                 $ime = $podaci->nameOfLeague;
+                  }
+                   ?>
+ 
     </div>
 
+    <div class="cell large-12 text-center">
+  <img src="<?php 
+ 
+ 
+ $putanja = file_exists(App::config("path") . "public/img/" . $ime . ".png") 
+ ?  App::config("url") . "public/img/" . $ime . ".png" 
+ : App::config("url") . "public/img/nepoznato.png";
+ 
+ echo $putanja ?>" alt="" />
+ </div>
+
+ <p>
     <div class="cell large-12"> <p class="text-center"> <b>#LJESTVICA</b> </p>
      </div>
 
 
     <table class="hover" id="example-table">
+
+    <?php foreach($tablica as $podaci){
+                 
+                 $ime = $podaci->nameOfLeague;
+                  }
+                   ?>
+ 
+ 
+                   
+ 
         <caption>
             <h4>Ljestvica</h4>
         </caption>

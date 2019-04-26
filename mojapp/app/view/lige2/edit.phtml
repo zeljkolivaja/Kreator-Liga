@@ -1,5 +1,17 @@
-<form class="log-in-form" method="post"
+<form class="log-in-form" enctype="multipart/form-data" method="post"
     action="<?php echo App::config("url") ?>liga/edit2/<?php echo Request::post("id") ?>">
+
+
+    <?php $ime=Request::post("nameOfLeague") ?>
+    <img src="<?php 
+     
+  
+     $putanja = file_exists(App::config("path") . "public/img/" . $ime . ".png") 
+     ?  App::config("url") . "public/img/" . $ime . ".png" 
+     : App::config("url") . "public/img/nepoznato.png";
+
+     echo $putanja ?>" alt="" />
+
 
 
 
@@ -19,6 +31,9 @@
         <input type="hidden" name="users" value="<?php echo Request::post("users") ?>" />
     </label>
 
+    <label>Editiraj sliku
+        <input type="file" name="slika" />
+    </label>
 
 
     <div class="grid-x">
@@ -39,9 +54,9 @@
 
 <div class="grid-x">
     <a href="<?php echo App::config("url") ?>liga/index2" class="success button expanded">
-    <i class="fas fa-arrow-left"></i>
+        <i class="fas fa-arrow-left"></i>
 
-Povratak
+        Povratak
     </a>
 
 
@@ -53,17 +68,33 @@ Povratak
 
         <thead>
             <tr>
+                <th width="300" style="text-align:center" >Grb</th>
                 <th width="300">Klub</th>
                 <th width="100">Obriši klub</th>
 
             </tr>
         </thead>
         <tbody>
-        <?php $y=0; ?>
+            <?php $y=0; ?>
             <?php foreach($tablica as $podaci): ?>
             <tr>
-                
+            <td style="text-align:center"> <?php $ime=$podaci->nameOfTeam; ?>
+
+<img src="<?php 
+
+
+$putanja = file_exists(App::config("path") . "public/img/" . $ime . ".png") 
+?  App::config("url") . "public/img/" . $ime . ".png" 
+: App::config("url") . "public/img/nepoznato.png";
+
+echo $putanja ?>" alt="" />
+</td>
+
+
                 <td><?php echo $podaci->nameOfTeam?></td>
+
+
+
                 <td style="text-align:left"><a style="color: red;"
                         href="<?php echo App::config("url") ?>table/delete2/<?php echo $podaci->id ?>">
                         <i class="fas fa-trash fa-2x"></i>
@@ -80,12 +111,8 @@ Povratak
             <?php $league = $podaci->sifra ?>
 
 
-
             <?php endforeach; ?>
 
         </tbody>
     </table>
 
-
- 
-  

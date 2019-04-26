@@ -180,11 +180,14 @@ function add2()
         if($kontrola===true){
         Table::add();
         $id = Request::post("league");
+        $ime =Request::post("nameOfTeam");
+        $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+        move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
         $this->prepareadd2($id);
     }else{
         $view = new View();
         $view->render(
-            'tables/poruka',
+            'tables2/poruka',
             [
             "poruka"=>$kontrola
             ]
@@ -263,6 +266,10 @@ function add2()
         $kontrola = $this -> kontrolaedit();
         if ($kontrola===true) {
             Table::update($id);
+            $ime =Request::post("nameOfTeam");
+            $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+            move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+
             $this->home();
         }else{
             $view = new View();
@@ -281,7 +288,10 @@ function add2()
         $kontrola = $this -> kontrolaedit();
         if ($kontrola===true) {
             Table::update($id);
-            $this->home();
+            $ime =Request::post("nameOfTeam");
+            $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+            move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+            $this->home2();
         }else{
             $view = new View();
             $view->render(

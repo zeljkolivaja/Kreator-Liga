@@ -1,56 +1,100 @@
-
-
-
 <div class="grid-x">
-<div class="cell"> 
+    <div class="cell">
 
-<a href="<?php echo App::config("url") ?>liga/index" class="success button expanded">
-<i class="fas fa-arrow-left"></i>
+        <a href="<?php echo App::config("url") ?>liga/index" class="success button expanded">
+            <i class="fas fa-arrow-left"></i>
 
-Povratak
-</a>
-</div>
+            Povratak
+        </a>
+    </div>
 
     <?php foreach($tablica as $vrsta): ?>
-    <div class="cell large-4">
-        <div>
-            
+    <div class="cell large-6 ">
+
             <?php if($vrsta->description==="1"){ ?>
-            <h4>Kolo <?php echo $vrsta->description ?>.</h4>
-            <hr>
+            <h4 class="text-center">Kolo <?php echo $vrsta->description ?>.</h4>
 
-            <h4>Momcadi</h4>
-            <h5><strong><?php echo $vrsta->hometeam?> vs <?php echo $vrsta->awayteam?>
-            <br/>
-            <h4>Rezultat susreta</h4>
+           
+            <p class="text-center"> <?php $ime= $vrsta->hometeam;  $ime1=$vrsta->awayteam?>
 
-                <strong><?php echo $vrsta->homeTeamGoals?> : <?php echo $vrsta->awayTeamGoals?>
-                  </strong>
-                   
+                <img src="<?php 
+
+$putanja = file_exists(App::config("path") . "public/img/" . $ime . ".png") 
+?  App::config("url") . "public/img/" . $ime . ".png" 
+: App::config("url") . "public/img/nepoznato.png";
+
+echo $putanja ?>" alt="" />
+
+
+                <img src="<?php 
+
+
+$putanja = file_exists(App::config("path") . "public/img/" . $ime1 . ".png") 
+?  App::config("url") . "public/img/" . $ime1 . ".png" 
+: App::config("url") . "public/img/nepoznato.png";
+
+echo $putanja ?>" alt="" />
+            </p>
+
+            <p>
+                <h4 class="text-center">Momcadi:</h4>
+            </p>
+
+            <h5 class="text-center"><strong><?php echo $vrsta->hometeam?> vs <?php echo $vrsta->awayteam?>
+                    <br />
+
+                    <h2><?php echo $vrsta->homeTeamGoals?> : <?php echo $vrsta->awayTeamGoals?>
+                    </h2>
+
                 </strong></h5>
+
+
             <?php }else{ ?>
-                <h4>Kolo <?php echo $vrsta->description ?>.</h4>
-             <h4>Momcadi</h4>
-            <h5><strong><?php echo $vrsta->awayteam?> vs <?php echo $vrsta->hometeam?>
-            <br/>
-            <h4>Rezultat susreta</h4>
+            <h4 class="text-center">Kolo <?php echo $vrsta->description ?>.</h4>
 
 
-                <strong><?php echo $vrsta->awayTeamGoals?> : <?php echo $vrsta->homeTeamGoals?>
- 
-                 </strong>
-                   
+
+            <p class="text-center"> <?php $ime= $vrsta->hometeam;  $ime1=$vrsta->awayteam?>
+
+            <img src="<?php 
+
+
+$putanja = file_exists(App::config("path") . "public/img/" . $ime1 . ".png") 
+?  App::config("url") . "public/img/" . $ime1 . ".png" 
+: App::config("url") . "public/img/nepoznato.png";
+
+echo $putanja ?>" alt="" />
+
+
+                <img src="<?php 
+
+$putanja = file_exists(App::config("path") . "public/img/" . $ime . ".png") 
+?  App::config("url") . "public/img/" . $ime . ".png" 
+: App::config("url") . "public/img/nepoznato.png";
+
+echo $putanja ?>" alt="" />
+
+
+            </p>
+
+            
+            <p>
+                <h4 class="text-center">Momcadi:</h4>
+            </p>
+
+            <h5 class="text-center"><strong><?php echo $vrsta->awayteam?> vs <?php echo $vrsta->hometeam?>
+                    <br />
+
+                    <h2><?php echo $vrsta->awayTeamGoals?> : <?php echo $vrsta->homeTeamGoals?>
+                    </h2>
+
                 </strong></h5>
-                <hr>
+ 
 
+            <?php } ?>
 
-            <?php } ?> 
-
-        </div>
     </div>
     <?php endforeach; ?>
 
 
 </div>
-
- 

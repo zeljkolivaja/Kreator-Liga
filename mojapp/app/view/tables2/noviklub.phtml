@@ -1,4 +1,5 @@
 <form class="log-in-form" method="post"
+    enctype="multipart/form-data"
     action="<?php echo App::config("url") ?>table/add2">
 
     <label>Ime Kluba
@@ -7,6 +8,11 @@
     <label> 
         <input type="hidden" name="league" value="<?php echo $poruka ?>" />
     </label>
+
+    <label>Slika
+        <input type="file" name="slika" />
+    </label>
+
 
 
     <div class="grid-x">

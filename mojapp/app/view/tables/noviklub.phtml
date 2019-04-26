@@ -1,15 +1,15 @@
-<form class="log-in-form" method="post"
+<form class="log-in-form" method="post" enctype="multipart/form-data"
     action="<?php echo App::config("url") ?>table/add">
 
     <label>Ime Kluba
-        <input type="text" name="nameOfTeam"/>
+        <input type="text" name="nameOfTeam" />
     </label>
 
     <label>Slika
-    <input type="file" name="slika"  />
-  </label>
+        <input type="file" name="slika" />
+    </label>
 
-    <label> 
+    <label>
         <input type="hidden" name="league" value="<?php echo $poruka ?>" />
     </label>
 
@@ -19,7 +19,7 @@
             <a href="<?php echo App::config("url") ?>liga/index" class="alert button expanded">
                 Odustani
             </a>
-            
+
 
         </div>
         <div class="large-6 columns" style="padding: 10px;">

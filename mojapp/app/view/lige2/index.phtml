@@ -9,6 +9,18 @@
     
         <!-- <div class="success callout operateri"> -->
         <h5><strong><?php echo $vrsta->nameOfLeague?></strong> </h5>
+        <p>     
+        
+        <?php $ime=$vrsta->nameOfLeague ?>
+    <img src="<?php 
+     
+  
+     $putanja = file_exists(App::config("path") . "public/img/" . $ime . ".png") 
+     ?  App::config("url") . "public/img/" . $ime . ".png" 
+     : App::config("url") . "public/img/nepoznato.png";
+
+     echo $putanja ?>" alt="" />
+  </p>
  
              <div> <?php echo $vrsta->gameName?> 
              </div>

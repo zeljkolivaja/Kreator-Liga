@@ -1,4 +1,5 @@
 <form class="log-in-form" method="post"
+    enctype="multipart/form-data"
     action="<?php echo App::config("url") ?>liga/add/">
 
  
@@ -8,8 +9,12 @@
         <input type="text" name="nameOfLeague"/>
     </label>
 
-    <label>Opis
+    <label>
         <input type="hidden" name="description" value=1 />
+    </label>
+
+    <label>Slika
+        <input type="file" name="slika" />
     </label>
 
     <label> 

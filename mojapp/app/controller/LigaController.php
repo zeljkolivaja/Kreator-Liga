@@ -80,6 +80,10 @@ class LigaController
     $kontrola = $this->kontrola();
     if($kontrola===true){
         Popis::add();
+        $ime =Request::post("nameOfLeague");
+        $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+        move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+
         $this->index();
     }else{    $view = new View();
         $view->render(
@@ -96,6 +100,10 @@ class LigaController
     $kontrola = $this->kontrola();
     if($kontrola===true){
         Popis::add();
+        $ime =Request::post("nameOfLeague");
+        $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+        move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+
         $this->index2();
     }else{    $view = new View();
         $view->render(
@@ -150,31 +158,16 @@ class LigaController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     function edit($id)
     {
     $_POST["id"]=$id;
     $kontrola = $this->kontrolaedit();
     if($kontrola===true){
     Popis::update($id);
+    $ime =Request::post("nameOfLeague");
+    $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+    move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+
     $this->index();
     }else{
     $view = new View();
@@ -196,6 +189,10 @@ class LigaController
     $kontrola = $this->kontrolaedit();
     if($kontrola===true){
     Popis::update($id);
+    $ime =Request::post("nameOfLeague");
+    $datoteka = APP::config("path") . "public/img/" . $ime . ".png"; 
+    move_uploaded_file($_FILES["slika"]["tmp_name"],$datoteka);                
+
     $this->index2();
     }else{
     $view = new View();
