@@ -159,3 +159,7 @@ background-color: #323232;
     margin-right: auto;
 
 }
+
+#reza > h5 > strong > h2 {
+    margin-bottom: 10%;
+}

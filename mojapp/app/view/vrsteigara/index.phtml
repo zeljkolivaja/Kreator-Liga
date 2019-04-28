@@ -1,7 +1,17 @@
+<div class="grid-container">
+    <div class="grid-x align-center">
+
+        <a href="<?php echo App::config("url") ?>vrsta/prepareadd"
+        class="success button">
+            Dodaj novi sport
+        </a>
+ 
+    </div>
+
 <div class="grid-x">
     <?php foreach($vrste as $vrsta): ?>
     <div class="cell large-4">
-        <div class="success callout operateri">
+        <div style="min-height:400px;">
             <h5><strong><?php echo $vrsta->gameName?>
                     <br />
                     <?php echo $vrsta->description?>
@@ -9,6 +19,17 @@
             Bodovi u slučaju pobjede: <?php echo $vrsta->pointsPerWin?> <br />
             Bodovi u slučaju nerješenog rezultata: <?php echo $vrsta->pointsPerDraw?><br />
             Bodovi u slučaju poraza: <?php echo $vrsta->pointsPerLoss?>
+            <br/>
+            <a href="<?php echo App::config("url") ?>vrsta/prepareEdit/<?php echo $vrsta->id?>"
+        class="button">
+            Editiraj sport
+        </a>
+      <br/>
+        <a href="<?php echo App::config("url") ?>vrsta/delete/<?php echo $vrsta->id?>"
+        class="button">
+            Obriši sport
+        </a>
+
 
 
         </div>

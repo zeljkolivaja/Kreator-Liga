@@ -1,0 +1,43 @@
+<form class="log-in-form" method="post" enctype="multipart/form-data"
+    action="<?php echo App::config("url") ?>vrsta/add">
+
+ 
+    <label>Naziv sporta
+        <input type="text" name="gameName" />
+    </label>
+
+    <label>Bodovi u slučaju pobjede
+        <input type="number" name="pointsPerWin" />
+    </label>
+
+    <label>Bodovi u slučaju nerješenog rezultata
+        <input type="number" name="pointsPerDraw" />
+    </label>
+
+    <label>Bodovi u slučaju poraza
+        <input type="number" name="pointsPerLoss" />
+    </label>
+
+
+    <label>opis natjecanja
+        <input type="text" name="description" />
+    </label>
+
+ 
+
+    <div class="grid-x">
+        <div class="large-6 columns" style="padding: 10px;">
+            <a href="<?php echo App::config("url") ?>vrsta/index" class="alert button expanded">
+                Odustani
+            </a>
+
+
+        </div>
+        <div class="large-6 columns" style="padding: 10px;">
+            <input type="submit" class="success button expanded" value="Dodaj sport" />
+        </div>
+    </div>
+
+</form>
+
+<?php echo $poruka ?>

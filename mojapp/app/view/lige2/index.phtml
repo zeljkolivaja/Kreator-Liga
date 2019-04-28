@@ -1,3 +1,14 @@
+<div class="grid-container">
+    <div class="grid-x align-center">
+
+        <a href="<?php echo App::config("url") ?>liga/prepareadd2/<?php echo Session::getInstance()->getUser()->firstName?>"
+        class="success button">
+            Dodaj novu ligu
+        </a>
+    </div>
+
+</div>
+ 
 <div class="grid-x">
 
     <?php foreach($popis as $vrsta): ?>
@@ -51,7 +62,7 @@
             Editiraj ligu
         </a>
 
-        <a href="<?php echo App::config("url") ?>table/resetiraj2/<?php echo $vrsta->id?>" class="button">
+        <a href="<?php echo App::config("url") ?>table/resetiraj2/<?php echo $vrsta->id?>" class="button" onclick="return confirm('Resetiranjem lige brišete sve rezultate i vraćate tablicu u početno stanje, jeste li sigurni?');" >
             Resetiraj ligu
         </a>
 
@@ -75,15 +86,5 @@
     <?php endforeach; ?>
 
 </div>
-<div class="grid-container">
-    <div class="grid-x align-center">
 
-        <a href="<?php echo App::config("url") ?>liga/prepareadd2/<?php echo Session::getInstance()->getUser()->firstName?>"
-        class="success button">
-            Dodaj novu ligu
-        </a>
-    </div>
-
-</div>
- 
  
