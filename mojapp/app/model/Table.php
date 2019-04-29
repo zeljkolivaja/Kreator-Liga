@@ -23,7 +23,7 @@ class Table{
         from leagueTable a left join league b on b.id=a.league
         inner join gameType c on b.gameType=c.id
         where b.id=$id
-        order by a.totalPoints DESC, a.totalGoalsScored DESC, a.totalGoalsConceded ASC;");
+        order by a.totalPoints DESC, a.totalGoalsScored-a.totalGoalsConceded DESC,a.totalGoalsScored DESC, a.totalGoalsConceded ASC;");
         $izraz->execute();
         return $izraz->fetchAll();
     }
